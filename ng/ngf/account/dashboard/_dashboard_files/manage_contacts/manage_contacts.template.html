@@ -1,0 +1,319 @@
+<!--User header-->
+<style>
+ .md-w{
+  background-color: #fff;
+ }
+ div#cal-week-box {
+  display: none;
+ }
+ .head{
+ }
+ .head_text{
+  vertical-align: super;
+  font-size: 25px;
+ }
+ .avatar_name {
+  font-size: initial;
+  vertical-align: super;
+  margin-left: 30px;
+  font-weight: 500;
+ }
+.contact-avatar{
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+
+</style>
+
+
+<md-content layout-align="start center" layout-xs="column">
+    <md-content>
+        <div style="background-image: url('images/banner.svg');" class="md-whiteframe-1dp">
+        <div layout="row" layout-align="space-between center" style="padding-left:16px; padding-right: 16px;">
+            <div layout-align="start center" style=" color: white">
+                <div class="head">
+
+        <span>
+             <md-button class="md-icon-button" type="button" hide-gt-md ng-click="toggleNav();">
+                <md-icon style="fill:white; color: #ffffff;">menu</md-icon>
+           </md-button>
+         <ng-md-icon icon="contacts" style="fill:white;" size="30"></ng-md-icon>
+            <!--<md-icon md-svg-icon="account" style="fill: white;"></md-icon>-->
+       </span>
+                    <span class="head_text">Contacts</span>
+                </div>
+            </div>
+            <div layout-align="start center" style=" color: white">
+      <span>
+       <md-input-container flex="33">
+         <md-icon class="material-icons" ng-m=bind="'search'"  style="fill: white;"></md-icon>
+          <input id="search-input" type="text" ng-model="search" placeholder="Search for anyone" />
+        </md-input-container>
+      </span>
+            </div>
+        </div>
+    </div>
+    </md-content>
+
+    <md-content flex layout="column">
+        <div class="md-padding" layout="row">
+        <md-sidenav style="margin-right: 24px; height: 400px" layout="column" class=" md-sidenav-left md-whiteframe-z2" md-component-id="contactNav" md-sidenav-left md-is-locked-open="$mdMedia('gt-md')">
+            <md-list>
+            <md-list-item class="md-2-line">
+                <p class="md-avatar">
+                    <ng-letter-avatar  data="Barry" shape="round" height="40px" width="40px"></ng-letter-avatar >
+                </p>
+
+                <!--<img class="md-avatar" src="images/profile.jpg"-->
+                     <!--/>-->
+                <div class="md-list-item-text">
+                    <h3> Barry Ogbonna </h3>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+                <md-list-item class="secondary-button-padding" ng-click="sortContact('all')">
+                    <p>All contacts</p>
+                </md-list-item>
+
+                <md-list-item class="secondary-button-padding" ng-click="sortContact('friends')">
+                    <p>Friends</p>
+                </md-list-item>
+
+                <md-list-item class="secondary-button-padding" ng-click="sortContact('clients')">
+                    <p>Clients</p>
+                </md-list-item>
+
+                <md-list-item class="secondary-button-padding" ng-click="sortContact('contacted')">
+                    <p>Recently Contacted</p>
+                </md-list-item>
+
+                <md-list-item class="secondary-button-padding" ng-click="sortContact('workers')">
+                    <p>Workers</p>
+                </md-list-item>
+
+                <md-list-item class="secondary-button-padding"ng-click="sortContact('vendors')">
+                    <p>Vendors</p>
+                </md-list-item>
+                </md-list>
+        </md-sidenav>
+
+            <div flex class="md-whiteframe-1dp md-w">
+
+                <div>
+                    <md-toolbar class="md-table-toolbar md-default" ng-show="!options.rowSelection || !selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>Contacts</span>
+                            <span flex></span>
+                            <md-button class="md-icon-button md-primary" ng-click="addContact($event)">
+                                <md-tooltip md-direction="down">Add Person</md-tooltip>
+                                <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'person_add'"></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" ng-click="loadStuff()">
+                                <md-tooltip md-direction="down">Refresh</md-tooltip>
+                                <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'refresh'"></md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+
+                    <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+                            <span flex></span>
+                            <md-button class="md-icon-button">
+                                <md-icon style="fill: red;" class="material-icons" ng-bind="'delete'"></md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+
+                    <md-table-container>
+                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                            <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                            <tr md-row>
+                                <th md-column ><span></span></th>
+                                <th md-column md:order:by="name"><span>Name</span></th>
+                                <th md-column  data-md-order-by="email" data-md-desc><span>Email</span></th>
+                                <!--<th md-column  data-md-order-by="calories.value" data-md-desc><span>Email</span></th>-->
+                                <th md-column><span>Phone number</span></th>
+                                <th md-column><span>Favorite</span></th>
+                                <th md-column><span></span></th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr ng-click="viewContact(dessert);" md-row md-select="dessert" md-select-id="name" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" data-ng-repeat="dessert in desserts.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                                <td md-cell>
+                                    <ng-letter-avatar data="{{dessert.name}}" shape="round" height="40px" width="40px"></ng-letter-avatar>
+                                    <!--<img class="contact-avatar" style=" margin-top: 7px;width: 40px;height: 40px;" src="images/profile.jpg" />-->
+                                </td>
+                                <td md-cell>{{dessert.name}}</td>
+                                <td md-cell>
+                                    {{dessert.email}}
+                                </td>
+                                <td md-cell>{{dessert.phone_number}}</td>
+                                <td md-cell>
+                                        <md-icon class="material-icons" ng-bind="'star_border'"></md-icon>
+                                </td>
+                                <td md-cell hide-sm>
+                                    <md-menu md-position-mode="target-right target" >
+                                        <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                            <md-icon class="material-icons" ng-bind="'more_vert'"></md-icon>
+                                        </md-button>
+                                        <md-menu-content width="3" >
+                                            <md-menu-item>
+                                                <md-button ng-disabled="true">
+                                                    <div layout="row" flex>
+                                                        <p flex>{{dessert.type}}</p>
+                                                    </div>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="viewContact(dessert);">
+                                                    <div layout="row" flex>
+                                                        <p flex>Edit</p>
+                                                    </div>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button>
+                                                    <div layout="row" flex>
+                                                        <p flex>Share</p>
+                                                    </div>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button>
+                                                    <div layout="row" flex>
+                                                        <p flex>Delete</p>
+                                                    </div>
+                                                </md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+
+                    <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+
+                </div>
+
+            </div>
+        </div>
+    </md-content>
+
+</md-content>
+
+<!--<div flex layout-align="start center" class="md-padding" layout-xs="column" layout="row">-->
+ <!--<div class="md-whiteframe-1dp" flex="100" layout="column">-->
+  <!--<div style="height: 90px; background-image: url('images/banner.svg');" class="md-whiteframe-1dp">-->
+   <!--<div layout="row" layout-align="space-between center" class="md-padding">-->
+    <!--<div layout-align="start center" style=" color: white">-->
+       <!--<div class="head">-->
+
+        <!--<span>-->
+             <!--<md-button class="md-icon-button" type="button" style="margin-bottom: 20px;" hide-gt-md ng-click="$ctrl.toggleNav();">-->
+                <!--<md-icon style="fill:white; color: #ffffff;">menu</md-icon>-->
+           <!--</md-button>-->
+         <!--<ng-md-icon icon="contacts" style="fill:white;" size="30"></ng-md-icon>-->
+         <!--&lt;!&ndash;<md-icon md-svg-icon="account" style="fill: white;"></md-icon>&ndash;&gt;-->
+       <!--</span>-->
+        <!--<span class="head_text">Contacts</span>-->
+       <!--</div>-->
+    <!--</div>-->
+     <!--<div layout-align="start center" style=" color: white">-->
+      <!--<span>-->
+       <!--<md-input-container flex="33">-->
+         <!--<md-icon md-svg-src="images/svg/ic_search_24px.svg"  style="fill: white;"></md-icon>-->
+          <!--<input id="search-input" type="text" ng-model="search" placeholder="Search for anyone" />-->
+        <!--</md-input-container>-->
+      <!--</span>-->
+    <!--</div>-->
+   <!--</div>-->
+  <!--</div>-->
+  <!--<div class=" md-padding md-whiteframe-1dp" style="min-height: 400px;" layout="row" flex>-->
+    <!--<md-sidenav layout="column" style="margin-right: 24px; height: 400px;" md-is-locked-open="$mdMedia('gt-md')"  class="md-w md-whiteframe-3dp">-->
+      <!--<div layout="row" layout-align="start center" class="md-padding">-->
+       <!--<div style="margin-left: 5px; margin-top: 5px">-->
+          <!--<span style="width: 40px; height: 40px; margin-bottom: 5px;">-->
+        <!--<ng-md-icon icon="account_circle"></ng-md-icon>-->
+       <!--</span>-->
+        <!--<span style="margin-bottom: 5px;" class="avatar_name"> Barry Ogbonna</span>-->
+       <!--</div>-->
+      <!--</div>-->
+     <!--<md-divider></md-divider>-->
+     <!--<div>-->
+       <!--<md-list>-->
+         <!--<md-list-item>-->
+           <!--<div class="md-button md-no-style">-->
+            <!--<button class="md-no-style md-button md-default-theme md-ink-ripple" type="button">-->
+             <!--All contacts-->
+             <!--<div class="md-ripple-container"></div>-->
+            <!--</button>-->
+           <!--</div>-->
+         <!--</md-list-item>-->
+        <!--<md-list-item>-->
+           <!--<div class="md-button md-no-style">-->
+            <!--<button class="md-no-style md-button md-default-theme md-ink-ripple" type="button">-->
+             <!--Friends-->
+             <!--<div class="md-ripple-container"></div>-->
+            <!--</button>-->
+           <!--</div>-->
+         <!--</md-list-item>-->
+        <!--<md-list-item>-->
+           <!--<div class="md-button md-no-style">-->
+            <!--<button class="md-no-style md-button md-default-theme md-ink-ripple" type="button">-->
+             <!--Clients-->
+             <!--<div class="md-ripple-container"></div>-->
+            <!--</button>-->
+           <!--</div>-->
+         <!--</md-list-item>-->
+        <!--<md-list-item>-->
+           <!--<div class="md-button md-no-style">-->
+            <!--<button class="md-no-style md-button md-default-theme md-ink-ripple" type="button">-->
+             <!--Recently Contacted-->
+             <!--<div class="md-ripple-container"></div>-->
+            <!--</button>-->
+           <!--</div>-->
+         <!--</md-list-item>-->
+        <!--<md-list-item>-->
+           <!--<div class="md-button md-no-style">-->
+            <!--<button class="md-no-style md-button md-default-theme md-ink-ripple" type="button">-->
+             <!--Workers-->
+             <!--<div class="md-ripple-container"></div>-->
+            <!--</button>-->
+           <!--</div>-->
+         <!--</md-list-item>-->
+           <!--<md-list-item>-->
+           <!--<div class="md-button md-no-style">-->
+            <!--<button class="md-no-style md-button md-default-theme md-ink-ripple" type="button">-->
+             <!--Vendors-->
+             <!--<div class="md-ripple-container"></div>-->
+            <!--</button>-->
+           <!--</div>-->
+         <!--</md-list-item>-->
+       <!--</md-list>-->
+     <!--</div>-->
+    <!--</md-sidenav>-->
+    <!--<div flex class="md-whiteframe-1dp md-padding md-w">-->
+        <!--<contacts-table></contacts-table>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div>-->
+
+  <!--</div>-->
+
+  <!--<div>-->
+
+  <!--</div>-->
+ <!--</div>-->
+
+<!--</div>-->
+
+
+
+

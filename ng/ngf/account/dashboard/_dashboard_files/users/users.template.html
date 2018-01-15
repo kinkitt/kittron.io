@@ -1,0 +1,73 @@
+<div ng-controller="usersCtrl">
+    <div layout="row" layout-align="center">
+        <div flex="95" class="md-whiteframe-1dp md-w">
+            <md-toolbar class="md-table-toolbar md-default" ng-show="!options.rowSelection || !selected.length">
+                <div class="md-toolbar-tools">
+                    <span>Users</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button md-primary" ui-sref="dashboard.add_user">
+                        <md-tooltip md-direction="down">Add User</md-tooltip>
+                        <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'add_circle'"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="loadStuff()">
+                        <md-tooltip md-direction="down">Refresh</md-tooltip>
+                        <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'refresh'"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <div style="background-color: white" class="md-padding">
+                <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+                    <div class="md-toolbar-tools">
+                        <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+                        <span flex></span>
+                        <md-button class="md-icon-button">
+                            <md-icon style="fill: red;" class="material-icons" ng-bind="'delete'"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-table-container>
+                    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                        <div ng-if="reloading"><md-progress-linear class="md-accent md-hue-1"  md-mode="indeterminate"></md-progress-linear></div>
+                        <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                        <tr md-row>
+                            <th md-column ><span></span></th>
+                            <th md-column md:order:by="name"><span>User</span></th>
+                            <th md-column><span>Phone number</span></th>
+                            <th md-column><span>Email</span></th>
+                            <th md-column><span>Gender</span></th>
+                            <th md-column><span>User Type</span></th>
+                            <th md-column><span>User Role</span></th>
+                            <th md-column><span>Location</span></th>
+                            <th md-column><span>Edit</span></th>
+                            <th md-column><span>Delete</span></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr ng-click="viewUser(user);" md-row md-select="user" md-select-id="id" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" data-ng-repeat="user in users.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                            <td md-cell><ng-letter-avatar dynamic="true" data="{{user.email}}" shape="round" height="40px" width="40px" charCount="2"></ng-letter-avatar></td>
+                            <td md-cell>{{user.first_name | ucfirst}} {{user.last_name | ucfirst}}</td>
+                            <td md-cell>{{user.contact_number}}</td>
+                            <td md-cell>{{user.email}}</td>
+                            <td md-cell>{{user.gender}}</td>
+                            <td md-cell>{{user.user_type}}</td>
+                            <td md-cell>{{user.user_role}}</td>
+                            <td md-cell>{{user.country}} {{user.state}}</td>
+                            <td md-cell>
+                                <md-button class="md-icon-button" aria-label="edit {{ user.name }}">
+                                    <md-icon class="material-icons" ng-bind="'mode_edit'" ng-click="editUser(user)"></md-icon>
+                                </md-button>
+                            </td>
+                            <td md-cell>
+                                <md-button class="md-icon-button" aria-label="delete {{ user.first_name }}">
+                                    <md-icon class="material-icons" ng-bind="'delete'" ng-click="confirmDelete($event, user)"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{users.total}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+            </div>
+        </div>
+    </div>
+</div>

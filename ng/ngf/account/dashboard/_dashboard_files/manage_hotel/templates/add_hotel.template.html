@@ -1,0 +1,476 @@
+
+<div ng-controller="addHotelCtrl">
+        <md-content class="md-padding">
+            <form name="hotelReg" novalidate>
+                <md-tabs md-dynamic-height md-border-bottom class="md-w">
+                    <md-tab>
+                        <md-tab-label>Detail <md-icon class="material-icons" ng-bind="'info'"></md-icon></md-tab-label>
+                        <md-tab-body>
+                            <div flex layout="column" class="md-padding" style="background-color: #ffffff">
+
+                                <md-input-container>
+                                    <label>Hotel Name</label>
+                                    <input name="hotelName" aria-label="Hotel Name" ng-model="new_hotel.hotelName" type="text" ng-required="true" ng-minlength="3" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }">
+                                    <div ng-messages="hotelReg.hotelName.$error">
+                                        <div ng-message="required">Hotel name is required.</div>
+                                        <div ng-message="maxlength" >Hotel name is too long.</div>
+                                        <div ng-message="minlength">Hotel name is too short.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container>
+                                    <label>Contact Person Name</label>
+                                    <input name="contactPerson" aria-label="Contact Person Name" ng-model="new_hotel.contactPerson" type="text" ng-required="true" ng-minlength="3" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }">
+                                    <div ng-messages="hotelReg.contactPerson.$error">
+                                        <div ng-message="required">Contact Person Name is required.</div>
+                                        <div ng-message="maxlength" >Contact Person Name is too long.</div>
+                                        <div ng-message="minlength">Contact Person Name is too short.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <div layout-gt-sm="row">
+                                    <md-input-container flex="50">
+                                        <label>Contact Person Phone</label>
+                                        <input name="contactPersonPhone" aria-label="Contact Person Phone" ng-model="new_hotel.contactPersonPhone" type="text" number-validate ng-required="true" ng-model-options="{ updateOn: 'blur' }">
+                                        <div ng-messages="hotelReg.contactPersonPhone.$error">
+                                            <div ng-message="required">Contact person phone number is required.</div>
+                                            <div ng-message="telephone">Please enter a valid phone number.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container flex="50">
+                                        <label>Contact Person Email</label>
+                                        <input name="contactPersonEmail" aria-label="Contact Person Email" ng-model="new_hotel.contactPersonEmail" type="email" email-validator email-availability ng-required="true" ng-model-options="{ updateOn: 'blur' }">
+                                        <div ng-messages="hotelReg.contactPersonEmail.$error">
+                                            <div ng-message="required">Contact person email is required.</div>
+                                            <div ng-message="email">Please enter a valid real e-mail address.</div>
+                                            <div ng-message="emailavail">This e-mail already exist.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <md-input-container>
+                                    <label>Listing Description</label>
+                                    <textarea name="listingDesc" aria-label="Listing Description" ng-model="new_hotel.listingDescription" ng-minlength="50" ng-maxlength="150" md-maxlength="150" rows="5" md-select-on-focus ng-required="true" ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                    <div ng-messages="hotelReg.listingDesc.$error">
+                                        <div ng-message="required">Hotel listing description is required.</div>
+                                        <div ng-message="maxlength" >Hotel listing description is too long.</div>
+                                        <div ng-message="minlength">Hotel listing description is too short.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container>
+                                    <label>Address</label>
+                                    <textarea name="hotelAddress" ng-model="new_hotel.address" ng-minlength="50" ng-maxlength="150" md-maxlength="150" rows="5" md-select-on-focus ng-required="true" ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                    <div ng-messages="hotelReg.hotelAddress.$error">
+                                        <div ng-message="required">Hotel address is required.</div>
+                                        <div ng-message="maxlength" >Hotel address is too long.</div>
+                                        <div ng-message="minlength">Hotel address is too short.</div>
+                                    </div>
+                                </md-input-container>
+                                <country-state-select country="new_hotel.country" state="new_hotel.state" country-label="Country" country-select-label="Select hotel country" state-label="State"  ></country-state-select>
+                                <div layout="row" flex="100">
+                                    <md-input-container flex="50">
+                                        <label>Year constructed</label>
+                                        <md-datepicker name="yearCon" ng-model="new_hotel.yearConstructed" md-current-view="year" ng-required="true" md-min-date="yearCons.minDate" md-max-date="yearCons.maxDate"></md-datepicker>
+                                        <div ng-messages="hotelReg.yearCon.$error">
+                                            <div ng-message="required">Year constructed is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container flex="50">
+                                        <label>Year renovated</label>
+                                        <md-datepicker name="yearRen" ng-model="new_hotel.yearRenovated" md-current-view="year" ng-required="true" md-min-date="yearCons.minDate" md-max-date="yearCons.maxDate"></md-datepicker>
+                                        <div ng-messages="hotelReg.yearRen.$error">
+                                            <div ng-message="required">Year renovated is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <fieldset style="padding:20px;">
+                                    <legend style="padding:5px;">Description of hotel selling points</legend>
+                                    <div layout="column">
+                                        <md-input-container>
+                                            <label>Factual selling point 1</label>
+                                            <textarea name="FSP1" ng-model="new_hotel.factualPoint.one" md-maxlength="150" rows="3" md-select-on-focus ng-minlength="50" ng-maxlength="150" ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.FSP1.$error">
+                                                <div ng-message="maxlength" >Factual selling point 1 is too long.</div>
+                                                <div ng-message="minlength">Factual selling point 1 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>Factual selling point 2</label>
+                                            <textarea name="FSP2" ng-model="new_hotel.factualPoint.two" md-maxlength="150" ng-minlength="50" ng-maxlength="150" rows="3" md-select-on-focus ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.FSP2.$error">
+                                                <div ng-message="maxlength" >Factual selling point 2 is too long.</div>
+                                                <div ng-message="minlength">Factual selling point 2 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>Factual selling point 3</label>
+                                            <textarea ng-model="new_hotel.FSP3.three" md-maxlength="150" ng-minlength="50" ng-maxlength="150" rows="3" md-select-on-focus ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.FSP3.$error">
+                                                <div ng-message="maxlength">Factual selling point 3 is too long.</div>
+                                                <div ng-message="minlength">Factual selling point 3 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+
+                                </fieldset>
+                                <fieldset style="padding:20px;">
+                                    <legend style="padding:5px;">Nearby amenities and attractions:</legend>
+                                    <div layout="column">
+                                        <md-input-container>
+                                            <label>Attraction 1 (name and distance)</label>
+                                            <textarea name="attrctn1" ng-model="new_hotel.amenitiesAttractions.one" ng-maxlength="150" ng-minlength="50" md-maxlength="150" rows="3" md-select-on-focus ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.attrctn1.$error">
+                                                <div ng-message="maxlength" >Attraction 1 is too long.</div>
+                                                <div ng-message="minlength">Attraction 1 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>Transport link 1 (name and distance)</label>
+                                            <textarea name="transport1" ng-model="new_hotel.amenitiesAttractions.oneLink" ng-maxlength="150" ng-minlength="50" md-maxlength="150" rows="3" md-select-on-focus ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.transport1.$error">
+                                                <div ng-message="maxlength" >Transport 1 is too long.</div>
+                                                <div ng-message="minlength">Transport 1 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>Attraction 2 (name and distance)</label>
+                                            <textarea name="attrctn2" ng-model="new_hotel.amenitiesAttractions.two" ng-maxlength="150" ng-minlength="50" md-maxlength="150" rows="3" md-select-on-focus ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.attrctn2.$error">
+                                                <div ng-message="maxlength" >Attraction 2 is too long.</div>
+                                                <div ng-message="minlength">Attraction 2 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>Transport link 2 (name and distance)</label>
+                                            <textarea name="transport2" ng-model="new_hotel.amenitiesAttractions.twoLink" ng-maxlength="150" ng-minlength="50" md-maxlength="150" rows="5" md-select-on-focus ng-model-options="{ updateOn: 'blur' }"></textarea>
+                                            <div ng-messages="hotelReg.transport2.$error">
+                                                <div ng-message="maxlength" >Transport 2 is too long.</div>
+                                                <div ng-message="minlength">Transport 2 is too short.</div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+
+                                </fieldset>
+
+                                <fieldset style="padding:20px;">
+                                    <legend style="padding:5px;">Paymant method accepted</legend>
+                                    <div flex-gt-sm="50">
+                                        <md-checkbox name="payMthd" ng-model="new_hotel.postPayment" aria-label="Post-payment" ng-disabled="new_hotel.prePayment" ng-required="true">
+                                            Post-payment (no guarantee)
+                                        </md-checkbox>
+                                    </div>
+                                    <div flex-gt-sm="50">
+                                        <md-checkbox name="payMthd" ng-model="new_hotel.prePayment" aria-label="Pre-payment" ng-disabled="new_hotel.postPayment" ng-required="true">
+                                            Pre-payment (paid up front)
+                                        </md-checkbox>
+                                    </div>
+                                    <div class="md-input-message-animation" style="color: rgb(221,44,0); opacity: 1; margin-top: 0;" ng-hide="new_hotel.prePayment || new_hotel.postPayment">
+                                        You must check a payment method.
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="padding:20px;">
+                                    <legend style="padding:5px;">Preferred currency</legend>
+                                    <div layout="column" layout-align="start space-between">
+                                        <div layout="row">
+                                            <md-checkbox ng-model="new_hotel.currency.usd" aria-label="USD">
+                                                USD
+                                            </md-checkbox>
+                                            <md-checkbox ng-model="new_hotel.currency.eur" aria-label="EUR">
+                                                EUR
+                                            </md-checkbox>
+                                            <md-checkbox ng-model="new_hotel.currency.gdp" aria-label="GBP">
+                                                GBP
+                                            </md-checkbox>
+                                            <md-checkbox ng-model="new_hotel.currency.ngn" aria-label="NGN">
+                                                NGN
+                                            </md-checkbox>
+                                            <md-checkbox ng-model="new_hotel.currency.cfa" aria-label="CFA">
+                                                CFA
+                                            </md-checkbox>
+                                            <md-checkbox ng-model="new_hotel.currency.zar" aria-label="ZAR">
+                                                ZAR
+                                            </md-checkbox>
+                                            <md-checkbox ng-model="new_hotel.currency.ksh" aria-label="KSH">
+                                                KSH
+                                            </md-checkbox>
+                                        </div>
+                                        <div class="md-input-message-animation" style="color: rgb(221,44,0); opacity: 1; margin-top: 0;" ng-hide="new_hotel.currency.usd">
+                                            You must check at least one preferred currency (USD).
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div layout="row" layout-align="start space-between">
+                                    <md-list>
+                                        <h5>Cancellation Policy</h5>
+                                        <md-divider></md-divider>
+                                        <md-list-item>
+                                            <p>Free cancellation if notified
+                                                <md-input-container>
+                                                    <input  aria-label="cancellation notification period" type="text" ng-model="new_hotel.cancelPolicy.notifiedBefore">
+                                                </md-input-container>
+                                                hours/days/weeks prior to arrival.
+                                            </p>
+                                        </md-list-item>
+                                        <h5>Children and Extra Bed Policy</h5>
+                                        <md-divider></md-divider>
+                                        <md-list-item>
+                                            <p>
+                                                <md-input-container>
+                                                    <input aria-label="extra bed policy" ng-model="new_hotel.extraBedPolicy.childMaxNo" type="text">
+                                                </md-input-container>
+                                                child/children under the age of
+                                                <md-input-container>
+                                                    <input aria-label="extra bed policy" type="text" ng-model="new_hotel.extraBedPolicy.childMaxAge">
+                                                </md-input-container>
+                                                stay free when using existing bedding.
+                                            </p>
+                                        </md-list-item>
+                                        <md-divider></md-divider>
+                                        <md-list-item>
+                                            <div layout="row">
+                                                <md-card flex-100>
+                                                    <md-toolbar class="md-table-toolbar md-default">
+                                                        <div class="md-toolbar-tools">
+                                                            <span>Facilities</span>
+                                                        </div>
+                                                    </md-toolbar>
+                                                    <md-table-container>
+                                                        <table md-table>
+                                                            <thead md-head>
+                                                            <tr md-row>
+                                                                <th md-column>Facility</th>
+                                                                <th md-column>Free</th>
+                                                                <th md-column>Charge</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody md-body>
+                                                            <tr md-row ng-repeat="facility in new_hotel.fac">
+                                                                <td md-cell ng-bind="facility.name"></td>
+                                                                <td md-cell>
+                                                                    <md-checkbox  ng-model="facility.free" aria-label="Free" ng-disabled="facility.charge"></md-checkbox>
+                                                                </td>
+                                                                <td md-cell>
+                                                                    <md-checkbox  ng-model="facility.charge" aria-label="Charge" ng-disabled="facility.free"></md-checkbox>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </md-table-container>
+                                                </md-card>
+                                            </div>
+                                        </md-list-item>
+
+                                    </md-list>
+                                </div>
+                            </div>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab>
+                        <md-tab-label>Room Type <md-icon class="material-icons" ng-bind="'room'"></md-icon></md-tab-label>
+                        <md-tab-body>
+                            <div flex layout="column" class="md-padding" style="background-color: #ffffff">
+
+                                <div layout="row">
+                                    <md-input-container flex="50">
+                                        <label>Room Name</label>
+                                        <input name="roomName" ng-model="new_hotel.roomName" type="text" ng-required="true" ng-minlength="2" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }">
+                                        <div ng-messages="hotelReg.roomName.$error">
+                                            <div ng-message="required">Room name is required.</div>
+                                            <div ng-message="minlength">Room name is too short.</div>
+                                            <div ng-message="maxlength">Room name is too long.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container flex="50">
+                                        <label>Number of rooms</label>
+                                        <input name="roomNo" ng-model="new_hotel.numberOfrooms" type="number" ng-required="true" ng-minlength="2" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }">
+                                        <div ng-messages="hotelReg.roomNo.$error">
+                                            <div ng-message="required">Room name is required.</div>
+                                            <div ng-message="minlength">Room name is too short.</div>
+                                            <div ng-message="maxlength">Room name is too long.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <div layout="row" layout-sm="column">
+                                    <div layout="column">
+                                        <md-card>
+                                            <md-toolbar class="md-table-toolbar md-default">
+                                                <div class="md-toolbar-tools">
+                                                    <span>Complementary</span>
+                                                </div>
+                                            </md-toolbar>
+                                            <md-table-container>
+                                                <table md-table>
+                                                    <thead md-head>
+                                                    <tr md-row>
+                                                        <th md-column>Breakfast</th>
+                                                        <th md-column>Lunch</th>
+                                                        <th md-column>Dinner</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody md-body>
+                                                    <tr md-row>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.comp.breakfast" aria-label="Breakfast"></md-checkbox>
+                                                        </td>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.comp.lunch" aria-label="Lunch"></md-checkbox>
+                                                        </td>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.comp.dinner" aria-label="Dinner"></md-checkbox>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </md-table-container>
+                                        </md-card>
+                                        <md-card>
+                                            <md-toolbar class="md-table-toolbar md-default">
+                                                <div class="md-toolbar-tools">
+                                                    <span>Bed size</span>
+                                                </div>
+                                            </md-toolbar>
+                                            <md-table-container>
+                                                <table md-table>
+                                                    <thead md-head>
+                                                    <tr md-row>
+                                                        <th md-column>Single (3' x 6')</th>
+                                                        <th md-column>Double (4' x 6')</th>
+                                                        <th md-column>Queensize (5' x 6')</th>
+                                                        <th md-column>Kingsize (6' x 6')</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody md-body>
+                                                    <tr md-row>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.bedSize.single" ng-disabled="new_hotel.bedSize.double || new_hotel.bedSize.queenSize || new_hotel.bedSize.kingSize" aria-label="Single"></md-checkbox>
+                                                        </td>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.bedSize.double" ng-disabled="new_hotel.bedSize.single || new_hotel.bedSize.queenSize || new_hotel.bedSize.kingSize" aria-label="Double"></md-checkbox>
+                                                        </td>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.bedSize.queenSize" ng-disabled="new_hotel.bedSize.single || new_hotel.bedSize.double || new_hotel.bedSize.kingSize" aria-label="Queensize"></md-checkbox>
+                                                        </td>
+                                                        <td md-cell>
+                                                            <md-checkbox  ng-model="new_hotel.bedSize.kingSize" ng-disabled="new_hotel.bedSize.single || new_hotel.bedSize.double || new_hotel.bedSize.queenSize" aria-label="Kingsize"></md-checkbox>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </md-table-container>
+                                        </md-card>
+                                    </div>
+                                    <div flex-100>
+                                        <div>
+                                            <lf-ng-md-file-input name="roomImage" lf-files="new_hotel.roomImage" lf-api="api09" lf-required lf-maxcount="1"  lf-drag-and-drop-label="Upload room image" lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" multiple drag preview></lf-ng-md-file-input>
+                                            <div ng-messages="hotelReg.roomImage.$error" style="color:red;">
+                                                <div ng-message="required">This is required.</div>
+                                                <div ng-message="maxcount">Too much files.</div>
+                                                <div ng-message="filesize">File size too large.</div>
+                                                <div ng-message="totalsize">Total size too large.</div>
+                                                <div ng-message="mimetype">Mimetype error.</div>
+                                            </div>
+                                            <!--<md-button type="button" ng-disabled="gallerForm.$invalid" class="md-raised md-primary" ng-click="api09.removeAll()">Submit</md-button>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div layout="row">
+                                    <md-input-container flex="25">
+                                        <label>Number of beds in each room</label>
+                                        <input ng-model="new_hotel.numberOfBeds" type="number" ng-required="true">
+                                    </md-input-container>
+                                    <md-input-container flex="25">
+                                        <label>Rate</label>
+                                        <input ng-model="new_hotel.rate" type="text" ng-required="true">
+                                    </md-input-container>
+                                    <md-input-container flex="25">
+                                        <label>Additional bed rate</label>
+                                        <input ng-model="new_hotel.additionaBedRate" type="text" ng-required="true">
+                                    </md-input-container>
+                                    <md-input-container flex="25">
+                                        <label>Other room rates</label>
+                                        <input ng-model="new_hotel.otherRoomRate" type="text" ng-required="true">
+                                    </md-input-container>
+                                </div>
+
+                                <md-card flex-100>
+                                    <md-toolbar class="md-table-toolbar md-default">
+                                        <div class="md-toolbar-tools">
+                                            <span>Room Amenities</span>
+                                        </div>
+                                    </md-toolbar>
+                                    <md-table-container>
+                                        <table md-table>
+                                            <thead md-head>
+                                            <tr md-row>
+                                                <th md-column>Amenities</th>
+                                                <th md-column>Free</th>
+                                                <th md-column>Charge</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody md-body>
+                                            <tr md-row ng-repeat="ani in new_hotel.roomAni">
+                                                <td md-cell>
+                                                    {{ ani.name }}
+                                                </td>
+                                                <td md-cell>
+                                                    <md-checkbox  ng-model="ani.free" aria-label="Free" ng-disabled="ani.charge"></md-checkbox>
+                                                </td>
+                                                <td md-cell>
+                                                    <md-checkbox  ng-model="ani.charge" aria-label="Charge" ng-disabled="ani.free"></md-checkbox>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </md-table-container>
+                                </md-card>
+                            </div>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab>
+                        <md-tab-label>Photo Gallery <md-icon class="material-icons" ng-bind="'photo_library'"></md-icon></md-tab-label>
+                        <md-tab-body>
+                            <div style="background-color: #ffffff" flex-100>
+                                <div class="md-padding">
+                                    <lf-ng-md-file-input name="gallery" lf-files="new_hotel.gallerFiles" lf-api="api09" lf-required lf-maxcount="5"  lf-drag-and-drop-label="Upload one or more image" lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" multiple drag preview></lf-ng-md-file-input>
+                                    <div ng-messages="hotelReg.gallery.$error" style="color:red;">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="maxcount">Too much files.</div>
+                                        <div ng-message="filesize">File size too large.</div>
+                                        <div ng-message="totalsize">Total size too large.</div>
+                                        <div ng-message="mimetype">Mimetype error.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab>
+                        <md-tab-label>Contact Info <md-icon class="material-icons" ng-bind="'contact_phone'"></md-icon></md-tab-label>
+                        <md-tab-body>
+                            <div flex layout="column" class="md-padding" style="background-color: #ffffff">
+                                <md-input-container>
+                                    <label>Front Desk or Reservation Agent Name </label>
+                                    <input ng-model="new_hotel.agent" type="text">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>Front Desk or Reservation Agent Phone</label>
+                                    <input ng-model="new_hotel.agentPhone" type="text">
+                                </md-input-container>
+
+                                <md-input-container>
+                                    <label>Front Desk or Reservation Agent Email</label>
+                                    <input ng-model="new_hotel.agentEmail" type="email">
+                                </md-input-container>
+                            </div>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+                <div><md-button ng-click="saveNewHotel()">save</md-button></div>
+            </form>
+        </md-content>
+    </div>

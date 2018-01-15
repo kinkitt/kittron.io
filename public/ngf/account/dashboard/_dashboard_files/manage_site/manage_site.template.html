@@ -1,0 +1,343 @@
+
+<div layout="row" layout-align="center center" flex="100">
+    <div layout="column" style="width:;" flex="70">
+        <md-card>
+            <md-toolbar>
+                <p style="padding-left: 10px" ng-bind-template="Setup Your {{ rdata.userProfile.user_type}} Public Profile"></p>
+            </md-toolbar>
+            <div ng-cloak>
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab label="Business Info">
+                            <md-content class="md-padding">
+                                <div class="md-padding">
+                                    <form name="bInfo">
+                                        <div layout="column">
+
+                                            <md-input-container class="md-block">
+                                                <label>Business Name</label>
+                                                <input name="businessName" placeholder="Business name" ng-model="bInfo.business_name" s-val ng-minlength="7" ng-maxlength="20" required>
+                                                <div ng-messages="bInfo.businessName.$error">
+                                                    <div ng-message="required">Business/company name is required.</div>
+                                                    <div ng-message="minlength">Business/company name is too short.</div>
+                                                    <div ng-message="maxlength" >Business/company name is too long.</div>
+                                                    <div ng-message="string">Business/company name is not valid.</div>
+                                                    <div ng-message="bexist">Business/company name exist.</div>
+                                                </div>
+                                            </md-input-container>
+
+                                            <md-checkbox ng-model="bInfo.registered" ng-true-value="'Yes'" ng-false-value="'No'" class="md-warn md-align-top-left" flex>
+                                            <span>
+                                                  Is your business registered?
+                                            </span>
+                                                <br/>
+                                            </md-checkbox>
+
+                                            <div ng-if="userType(rdata.userProfile.user_type, 'Vendor')">
+                                                <md-input-container class="md-block">
+                                                    <label>Services </label>
+                                                    <md-select ng-model="bInfo.vendorService" ng-required="true">
+                                                        <md-option><em>None</em></md-option>
+                                                        <md-option ng-repeat="services in vendorServices" ng-value="services"> {{services}} </md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                            </div>
+
+                                            <div ng-if="userType(rdata.userProfile.user_type, 'Event Planner')">
+                                                <md-input-container class="md-block">
+                                                    <label>Work number</label>
+                                                    <md-icon class="material-icons" ng-bind="'phone'"></md-icon>
+                                                    <input type="text" name="work" placeholder="Work/office number" class="form-control" ng-model="bInfo.work_number" number-validate required/>
+                                                    <div ng-messages="bInfo.work.$error">
+                                                        <div ng-message="required">Work/office number is required.</div>
+                                                        <div ng-message="telephone">Please enter a valid Work/office number.</div>
+                                                        <div ng-message="minlength">Too short.</div>
+                                                        <div ng-message="maxlength">Too long.</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <label class="md-block">Choose event planning type. </label>
+                                                <md-input-container>
+                                                    <md-checkbox ng-model="bInfo.type1" ng-click="checkType()" ng-true-value="true" ng-false-value="false" class="md-warn md-align-top-left" flex>
+                                                        <span> Full service Planning </span>
+                                                    </md-checkbox>
+
+                                                    <md-checkbox ng-model="bInfo.type2" ng-disabled="full"  ng-true-value="true" ng-false-value="false" class="md-warn md-align-top-left" flex>
+                                                        <span>Day of Event Planning</span>
+
+                                                    </md-checkbox>
+                                                    <md-checkbox  ng-model="bInfo.type3" ng-disabled="full" ng-true-value="true" ng-false-value="false" class="md-warn md-align-top-left" flex>
+                                                    <span>Planning Only</span>
+                                                </md-checkbox>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <md-button class="md-primary md-raised md-hue-2 pull-right clearfix"ng-disabled="bInfo.$invalid" ng-click="saveBinfo(bInfo.$valid,rdata.userProfile);">save</md-button>
+                                    </form>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Site Info">
+                            <md-content class="md-padding">
+                                <div class="md-padding">
+                                    <form name="sInfo">
+                                        <md-input-container md-no-float class="md-block">
+                                            <input ng-model="sInfo.domain" type="text" placeholder="Desired Web Address" >
+                                            <md-icon class="material-icons" ng-bind="'web'"></md-icon>
+                                        </md-input-container>
+                                        <!--<div layout-gt-xs="row">-->
+                                            <!--<md-input-container class="md-block" flex-gt-xs>-->
+                                                <!--<label>Custom email</label>-->
+                                                <!--<input type="text" ng-model="sInfo.custom_email" ng-init="sInfo.custom_email = customEmail(rdata.email.data, rdata.email.data)">-->
+                                                <!--<i>This is your customized email address for mailing and marketing purposes</i>-->
+                                            <!--</md-input-container>-->
+                                        <!--</div>-->
+                                        <md-input-container class="md-block">
+                                            <label>Business description</label>
+                                            <textarea placeholder="Enter your business description" ng-model="sInfo.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                                        </md-input-container>
+                                        <md-button class="md-primary md-raised md-hue-2 pull-right clearfix" ng-disabled="sInfo.$invalid" ng-click="saveSinfo(sInfo.$valid)">Save</md-button>
+
+                                    </form>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Site Media">
+                            <md-content class="md-padding">
+
+                                <div class="md-padding">
+                                    <div layout="column">
+                                        <h1 class="md-caption">Result Page Image</h1>
+                                        <md-divider></md-divider>
+                                        <div layout="row" layout-align="center center">
+                                            <div flex="50">
+                                                <form name="testForm">
+                                                    <lf-ng-md-file-input name="files00" lf-files="resultImage" lf-api="api09" lf-required lf-maxcount="1"  lf-drag-and-drop-label="Drag and Drop here!" lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" progress multiple drag preview></lf-ng-md-file-input>
+                                                    <div ng-messages="testForm.files00.$error" style="color:red;">
+                                                        <div ng-message="required">This is required.</div>
+                                                        <div ng-message="maxcount">Too much files.</div>
+                                                        <div ng-message="filesize">File size too large.</div>
+                                                        <div ng-message="totalsize">Total size too large.</div>
+                                                        <div ng-message="mimetype">Mimetype error.</div>
+                                                    </div>
+                                                    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="rpi()">Submit</md-button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <md-divider></md-divider>
+                                        <h1 class="md-caption">Images For Gallery</h1>
+                                        <div layout="column">
+                                            <form name="gallerForm">
+                                                <lf-ng-md-file-input name="files01" lf-files="files10" lf-api="api09" lf-required lf-maxcount="5"  lf-drag-and-drop-label="Drag and Drop here!" lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" multiple drag preview></lf-ng-md-file-input>
+                                                <div ng-messages="gallerForm.files01.$error" style="color:red;">
+                                                    <div ng-message="required">This is required.</div>
+                                                    <div ng-message="maxcount">Too much files.</div>
+                                                    <div ng-message="filesize">File size too large.</div>
+                                                    <div ng-message="totalsize">Total size too large.</div>
+                                                    <div ng-message="mimetype">Mimetype error.</div>
+                                                </div>
+                                                <md-button type="button" ng-disabled="gallerForm.$invalid" class="md-raised md-primary" ng-click="api09.removeAll()">Submit</md-button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Facility">
+                            <md-content class="md-padding">
+                                <div class="md-padding">
+                                    <form name="facility">
+                                        <fieldset>
+                                            <legend>Select facilities</legend>
+                                            <div layout="row" layout-wrap flex>
+                                                <div flex-xs flex="50">
+                                                    <md-checkbox aria-label="Select All" ng-checked="isChecked()" md-indeterminate="isIndeterminate()" ng-click="toggleAll()">
+                                                        <span ng-if="isChecked()">Un-</span>Select All
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="100" ng-repeat="item in [1,2,3,4,5]">
+                                                    <md-checkbox ng-click="toggle(item, selected)">
+                                                        {{ item }}
+                                                    </md-checkbox>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Offers">
+                            <md-content class="md-padding">
+                                <div class="md-padding">
+                                    <form name="offer">
+                                        <md-input-container md-no-float class="md-block flex-20">
+                                            <input ng-model="offer.title" type="text" placeholder="Offer Title" >
+                                            <md-icon class="material-icons" ng-bind="'web'"></md-icon>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label>Business description</label>
+                                            <textarea placeholder="Enter your offer description" ng-model="offer.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                                        </md-input-container>
+                                        <md-button class="md-primary md-raised md-hue-2 pull-right clearfix" ng-disabled="offer.$invalid" ng-click="saveOffer(offer.$valid)">Save</md-button>
+
+                                    </form>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+            </div>
+        </md-card>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<style>-->
+    <!--.list{-->
+        <!--list-style-type: none;-->
+    <!--}-->
+    <!--.list li{-->
+        <!--float: left;-->
+        <!--padding: 5px;-->
+    <!--}-->
+    <!--button {-->
+        <!--margin-top: 4px;-->
+    <!--}-->
+
+<!--</style>-->
+<!--<div>-->
+    <!--<div class="alert alert-info">-->
+        <!--Your site address is <strong><a>www.xyz.kr.com</a></strong>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<h4>Site Details</h4>-->
+        <!--<div>-->
+            <!--<div class="col-md-12 col-sm-10">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading clearfix">-->
+                        <!--<h5 class="col-sm-2">Logo</h5>-->
+                        <!--<button type="button" class="pull-right btn btn-primary">Edit <i class="fa fa-wa fa-edit"></i></button>-->
+                        <!--<button type="button" class="pull-right btn btn-primary">Save <i class="fa fa-wa fa-check"></i></button>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--<form novalidate>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">Brand Name</label>-->
+                                <!--<div class="col-sm-4 input-group controls">-->
+                                    <!--<input type="email" class="form-control" id="brand_name" placeholder="Brand / Business Name" ng-model="brand_name" ng-pattern="" ng-required="true">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">Email</label>-->
+                                <!--<div class="col-sm-4 input-group controls">-->
+                                    <!--<input type="email" class="form-control" id="email_address" placeholder="Business Address" ng-model="business_address" ng-pattern="" ng-required="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">Business description</label>-->
+                                <!--<div class="col-sm-4 input-group controls">-->
+                                    <!--<textarea cols="10" class="form-control"  placeholder="Business description" ng-model="brand_name" ng-pattern="" ng-required="true"></textarea>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">Address</label>-->
+                                <!--<div class="col-sm-4 input-group controls">-->
+                                    <!--<input type="email" class="form-control" id="business_address" placeholder="Business Address" ng-model="business_address" ng-pattern="" ng-required="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-fw fa-building"></i></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">Contact Number</label>-->
+                                <!--<div class="col-sm-4 input-group controls">-->
+                                    <!--<input type="email" class="form-control" id="contact_num" placeholder="Contact Number" ng-model="contact_num" ng-pattern="" ng-required="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-fw fa-mobile-phone"></i></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">Social Links</label>-->
+                                <!--<div class="col-sm-4 input-group controls">-->
+                                    <!--<input type="text" class="form-control" id="facebook_link" placeholder="Facebook Username" ng-model="facebook_link" ng-pattern="" ng-required="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-fw fa-facebook"></i></span>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-4 col-sm-offset-2 input-group controls">-->
+                                    <!--<input type="email" class="form-control" id="twitter_link" placeholder="Twitter Handle" ng-model="twitter_link" ng-pattern="" ng-required="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-fw fa-twitter"></i></span>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-4 col-sm-offset-2 input-group controls">-->
+                                    <!--<input type="email" class="form-control" id="insta_link" placeholder="Instagram Handle" ng-model="insta_link" ng-pattern="" ng-required="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-fw fa-instagram"></i></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>                    </div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<hr>-->
+    <!--<div>-->
+        <!--<h4>Site Files</h4>-->
+            <!--<div class="col-md-12 col-sm-10">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading clearfix">-->
+                        <!--<h5 class="col-sm-2">Logo</h5>-->
+                        <!--<button type="button" class="pull-right btn btn-primary">Upload logo</button>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--<img src="" class="image" width="100px" height="100px">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--<div class="col-md-12 col-sm-10">-->
+
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading clearfix">-->
+                    <!--<h5 class="col-sm-2">My Collection</h5>-->
+                    <!--<button type="button" class="pull-right btn btn-primary">Upload to collection</button>-->
+                <!--</div>-->
+                <!--<div class="panel-body">-->
+                    <!--<ul class="list">-->
+                        <!--<li>-->
+                            <!--<img src="" class="image" width="200px" height="200px">-->
+                            <!--<br/>-->
+                            <!--<button type="button" class="btn btn-primary">Change</button>-->
+                            <!--<button type="button" class="btn btn-danger">X</button>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="" class="image" width="200px" height="200px">-->
+                            <!--<br/>-->
+                            <!--<button type="button" class="btn btn-primary">Change</button>-->
+                            <!--<button type="button" class="btn btn-danger">X</button>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="" class="image" width="200px" height="200px">-->
+                            <!--<br/>-->
+                            <!--<button type="button" class="btn btn-primary">Change</button>-->
+                            <!--<button type="button" class="btn btn-danger">X</button>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="" class="image" width="200px" height="200px">-->
+                            <!--<br/>-->
+                            <!--<button type="button" class="btn btn-primary">Change</button>-->
+                            <!--<button type="button" class="btn btn-danger">X</button>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="" class="image" width="200px" height="200px">-->
+                            <!--<br/>-->
+                            <!--<button type="button" class="btn btn-primary">Change</button>-->
+                            <!--<button type="button" class="btn btn-danger">X</button>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+

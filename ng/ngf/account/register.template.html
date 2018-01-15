@@ -1,0 +1,152 @@
+<style type="text/css">
+
+/* ANIMATIONS
+============================================================================= */
+/* slide out to the left */
+@keyframes slideOutLeft {
+    to 		{ transform: translateX(-200%); }
+}
+@-moz-keyframes slideOutLeft {
+    to 		{ -moz-transform: translateX(-200%); }
+}
+@-webkit-keyframes slideOutLeft {
+    to 		{ -webkit-transform: translateX(-200%); }
+}
+
+/* slide in from the right */
+@keyframes slideInRight {
+    from 	{ transform:translateX(200%); }
+    to 		{ transform: translateX(0); }
+}
+@-moz-keyframes slideInRight {
+    from 	{ -moz-transform:translateX(200%); }
+    to 		{ -moz-transform: translateX(0); }
+}
+@-webkit-keyframes slideInRight {
+    from 	{ -webkit-transform:translateX(200%); }
+    to 		{ -webkit-transform: translateX(0); }
+}
+    .form-inner{
+        max-width:617px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+    }
+
+.messages {
+    transition:1s linear all;
+    position: absolute;
+    display: block;
+    border-bottom: 1px dotted black;
+}
+.messages.ng-active {
+}
+.messages.ng-inactive {
+
+}
+.message {
+    transition:1s linear all;
+    text-align: center;
+}
+
+.message.ng-enter {
+    transition: opacity .2s;
+}
+.message.ng-enter.ng-enter-active {
+    opacity:1;
+    margin-bottom: -60px;
+}
+
+.message.ng-leave {
+    opacity:1;
+    margin-bottom: 20px;
+
+}
+.message.ng-leave.ng-leave-active {
+    opacity: 0;
+    margin-bottom: -55px;
+}
+
+.messages .message {
+    display: block;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.messages .message::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+	.link{
+		color: grey;
+	}
+	 .active{
+		 background-color: black;
+	 }
+
+</style>
+<div ng-controller="RegisterCtrl" layout-align="center center" layout="column" flex="100">
+
+<md-card ng-show="switcher" flex="50">
+<p class="md-heading" style="text-align:center;">Register me as;</p>
+	<div layout="row" layout-align="center center">
+		<md-button ng-click="registerAs('event_planner')">
+			event planner
+		</md-button>
+		
+		<md-button ng-click="registerAs('vendor')">
+			Vendor
+		</md-button>
+	</div>
+</md-card>
+<md-card ng-show="!switcher" style="width:500px;">
+<md-toolbar class="" >
+      <!--<div class="md-toolbar-tools" layout-align="center center">    -->
+      	 <!--<md-button class="md-icon-button" aria-label="Person" ui-sref-active="active" ui-sref=".basic">-->
+          <!--<md-icon class="material-icons link" >person</md-icon>-->
+        <!--</md-button>-->
+      	 <!--<md-button class="md-icon-button" aria-label="Work" ui-sref-active="active" ui-sref=".business">-->
+          <!--<md-icon class="material-icons link" >work</md-icon>-->
+        <!--</md-button>-->
+      	 <!--<md-button class="md-icon-button" aria-label="Public" ui-sref-active="active" ui-sref=".website">-->
+          <!--<md-icon class="material-icons link">public</md-icon>-->
+        <!--</md-button>-->
+      	 <!--<md-button class="md-icon-button" aria-label="check" ui-sref-active="active" ui-sref=".confirm">-->
+			 <!--<md-icon class="material-icons link">check</md-icon>-->
+        <!--</md-button>-->
+      <!--</div>-->
+      <div class="md-toolbar-tools" layout-align="center center">
+      	<!--<p ng-if="$state.current.name === 'register.basic'">  User Information</p>-->
+      	<!--<p ng-if="$state.current.name === 'register.business'">  Business Information</p>-->
+      	<!--<p ng-if="$state.current.name === 'register.website'"> Website setup</p>-->
+      	<!--<p ng-if="$state.current.name === 'register.confirm'"> Confirmation</p>-->
+		  <p>Create Your Kittron Account</p>
+      </div>
+</md-toolbar>
+
+<div class="wizard" >
+<div class="wizard-inner">
+    		<div class="form-inner" >
+				<form role="form" name="registerForm" class="form-horizontal" novalidate>
+    				<div class="form-views" ui-view></div>
+				</form>
+		</div>
+</div>
+</div>
+</md-card>
+</div>

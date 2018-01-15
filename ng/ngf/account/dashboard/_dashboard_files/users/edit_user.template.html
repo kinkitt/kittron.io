@@ -1,0 +1,119 @@
+<div data-ng-controller="userEditCtrl">
+    <div layout="row" layout-align="start space-between" class="md-padding">
+        <div flex="60" class="md-whiteframe-1dp md-w" style="background-color: white;">
+            <form name="updateform" novalidate class="md-padding">
+                <div layout="row">
+                    <md-input-container flex="50">
+                        <label>First Name</label>
+                        <input name="firstName" placeholder="First name" ng-model="userData.first_name" ng-minlength="3" ng-maxlength="10" required>
+                        <div ng-messages="registerForm.firstName.$error">
+                            <div ng-message="required">First Name is required.</div>
+                            <div ng-message="maxlength" >Your First Name is too long.</div>
+                            <div ng-message="minlength">Your First Name is too short.</div>
+                        </div>
+
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Last Name</label>
+                        <input name="lastName" placeholder="Last name" ng-model="userData.last_name" ng-minlength="3" ng-maxlength="10" required>
+                        <div ng-messages="registerForm.lastName.$error">
+                            <div ng-message="required">Last Name is required.</div>
+                            <div ng-message="minlength">Your Last Name is too short.</div>
+                            <div ng-message="maxlength" >Your Last Name is too long.</div>
+                        </div>
+                    </md-input-container>
+
+                </div>
+                <div layout="column">
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <md-icon class="material-icons">email</md-icon>
+                        <input type="email" name="email" placeholder="Email (required)" ng-model="userData.email" email-availability email-validator data-ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="80" required>
+                        <div ng-messages="registerForm.email.$error">
+                            <div ng-message="required">Email is required.</div>
+                            <div ng-message="email">Please enter a valid real e-mail address.</div>
+                            <div ng-message="emailavail">This e-mail already exist.</div>
+                            <div ng-message="minlength">Too short.</div>
+                            <div ng-message="maxlength">Too long.</div>
+                        </div>
+                        <div data-ng-show="registerForm.email.$pending">
+                            please wait...
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Contact number</label>
+                        <md-icon class="material-icons">phone</md-icon>
+                        <input type="text" name="cont"  placeholder="Contact Number" number-validate ng-model="userData.contact_number"  ng-minlength="11" ng-maxlength="15"  ng-required="true">
+                        <div ng-messages="registerForm.cont.$error">
+                            <div ng-message="required">Contact number is required.</div>
+                            <div ng-message="telephone">Please enter a valid contact number.</div>
+                            <div ng-message="minlength">Too short.</div>
+                            <div ng-message="maxlength">Too long.</div>
+                        </div>
+                    </md-input-container>
+
+                    <div>
+                        <label>Date of Birth</label>
+                        <md-input-container>
+                            <md-datepicker ng-model="userData.dob" md-placeholder="Enter date"  name="dateField" min="1947-01-01" max="1998-12-31" required></md-datepicker>
+                            <div ng-messages="registerForm.dateField.$error">
+                                <div ng-message="valid">The entered value is not a date!</div>
+                                <div ng-message="required">Date of Birth is required!</div>
+                                <div ng-message="min">Date is too early!</div>
+                                <div ng-message="max">Date is too late!</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <md-radio-group ng-model="userData.gender">
+                        <md-radio-button value="Male" class="md-primary">Male </md-radio-button>
+                        <md-radio-button   value="Female" > Female</md-radio-button>
+                    </md-radio-group>
+
+                    <country-state-select country="userData.country" state="userData.state" country-label="Country" country-select-label="Select your country" state-label="State"  ></country-state-select>
+
+
+                </div>
+                <div flex layout="column" layout-align="center center">
+                    <md-button class="md-primary md-raised md-hue-2 pull-right clearfix" ng-disabled="registerForm.$invalid" ng-click="signUp()">Update</md-button>
+                </div>
+            </form>
+         </div>
+        <div flex="20" class="md-whiteframe-14dp" style="background-color: white;margin-left: 10px;" layout-align="center">
+            <div class="md-padding">
+                <span style="padding: 5px">
+                    Registered <span am-time-ago="userData.created_at"></span>
+                </span>
+                <div layout="row" layout-align="space-between center">
+                    <md-input-container class="flex-100">
+                        <label>Type</label>
+                        <md-select ng-model="userData.user_type" class="md-no-underline">
+                            <md-option value="Event Center">Event Center</md-option>
+                            <md-option value="Event Planner">Event Planner</md-option>
+                            <md-option value="Hotel">Hotel</md-option>
+                            <md-option value="Vendor">Vendor</md-option>
+                            <md-option value="Kitt Staff">Kitt Staff</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="space-between center">
+                    <md-input-container class="flex-100">
+                        <label>Role</label>
+                        <md-select ng-model="userData.role">
+                            <md-option value="Admin">Admin</md-option>
+                            <md-option value="Desk">Desk</md-option>
+                            <md-option value="Super Admin">Super Admin</md-option>
+                            <md-option value="User">User</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container>
+                        <md-switch ng-disabled="true" ng-model="userData.verified" ng-true-value="'true'" ng-false-value="'false'">Verification {{ userData.verified }}</md-switch>
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+<!--User header-->
+<style>
+    .md-w{
+        background-color: #fff;
+    }
+    div#cal-week-box {
+        display: none;
+    }
+</style>
+
+<div flex layout-align="end start" class="md-padding" layout-xs="column" layout="row">
+    <div class="md-whiteframe-1dp" flex="100" flex-gt-xs="100" flex-md="70" flex-gt-sm="70" flex-gt-md="70" layout-align="column">
+    <div style="height: 160px; background-image: url('images/banner.svg');" class="md-whiteframe-1dp">
+        <div layout="row" layout-align="space-between">
+            <span class="md-display-1 md-padding" style="font-weight: normal; color: #ffffff;">Welcome back {{rdata.userProfile.first_name}}</span>
+        </div>
+    </div>
+        <div>
+            <md-content>
+                <md-tabs md-dynamic-height md-border-bottom class="md-w">
+                    <md-tab label="Home">
+                        <div>
+                            <md-widget-engine configuration='data.configuration' callback="data.callback"></md-widget-engine>
+                        </div>
+                        <md-content class="md-padding" flex="100" layout="row">
+                            <div class="md-w md-whiteframe-3dp" layout="column" flex>
+                                <!--<div class="" ng-controller="calCtrl as vm" flex  style="background-image: url('images/user_header_banner_1.jpg');">-->
+                                    <!--<h2 class="text-center">{{ vm.calendarTitle }}</h2>-->
+
+                                    <!--<div class="row">-->
+
+                                        <!--<div class="col-md-6 text-center">-->
+                                            <!--<div class="btn-group">-->
+
+                                                <!--<md-button-->
+                                                        <!--class="md-raised md-primary md-button"-->
+                                                        <!--mwl-date-modifier-->
+                                                        <!--date="vm.viewDate"-->
+                                                        <!--decrement="vm.calendarView"-->
+                                                        <!--ng-click="vm.cellIsOpen = false">-->
+                                                    <!--Previous-->
+                                                <!--</md-button>-->
+                                                <!--<md-button-->
+                                                        <!--class="md-primary  md-button md-raised"-->
+                                                        <!--mwl-date-modifier-->
+                                                        <!--date="vm.viewDate"-->
+                                                        <!--set-to-today-->
+                                                        <!--ng-click="vm.cellIsOpen = false">-->
+                                                    <!--Today-->
+                                                <!--</md-button>-->
+                                                <!--<md-button-->
+                                                        <!--class="md-raised md-primary md-button"-->
+                                                        <!--mwl-date-modifier-->
+                                                        <!--date="vm.viewDate"-->
+                                                        <!--increment="vm.calendarView"-->
+                                                        <!--ng-click="vm.cellIsOpen = false">-->
+                                                    <!--Next-->
+                                                <!--</md-button>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                        <!--<br class="visible-xs visible-sm">-->
+
+                                        <!--<div class="col-md-6 text-center">-->
+                                            <!--<div class="btn-group">-->
+                                                <!--<md-button class="md-icon-button md-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false"><md-icon md-svg-src="images/svg/ic_view_list_24px.svg">></md-icon><md-tooltip md-direction="bottom">Year</md-tooltip></md-button>-->
+                                                <!--<md-button class="md-icon-button md-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false"><md-icon md-svg-src="images/svg/ic_view_module_24px.svg">></md-icon><md-tooltip md-direction="bottom">Month</md-tooltip></md-button>-->
+                                                <!--<md-button class="md-icon-button md-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false"><md-icon md-svg-src="images/svg/ic_view_week_24px.svg"></md-icon><md-tooltip md-direction="bottom">Week</md-tooltip></md-button>-->
+                                                <!--<md-button class="md-icon-button md-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false"><md-icon md-svg-src="images/svg/ic_view_day_24px.svg">></md-icon><md-tooltip md-direction="bottom">Day</md-tooltip></md-button>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                    <!--</div>-->
+
+                                    <!--<br>-->
+                                    <!--<div class="md-padding"  style="background-color: white; min-height: 568px;">-->
+                                        <!--<mwl-calendar-->
+                                                <!--events="vm.events"-->
+                                                <!--view="vm.calendarView"-->
+                                                <!--view-title="vm.calendarTitle"-->
+                                                <!--view-date="vm.viewDate"-->
+                                                <!--on-event-click="vm.eventClicked(calendarEvent)"-->
+                                                <!--on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"-->
+                                                <!--cell-is-open="vm.cellIsOpen"-->
+                                                <!--day-view-start="06:00"-->
+                                                <!--day-view-end="22:59"-->
+                                                <!--day-view-split="30"-->
+                                                <!--cell-modifier="vm.modifyCell(calendarCell)"-->
+                                                <!--cell-auto-open-disabled="true"-->
+                                                <!--on-timespan-click="vm.timespanClicked(calendarDate, calendarCell)">-->
+                                        <!--</mwl-calendar>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Budget Summary">
+                        <md-content>
+                            <div layout="column" flex class="md-w">
+                                <!--<budget-table></budget-table>-->
+                                Bss
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Team Members">
+                        <md-content class="md-padding">
+                            <h1 class="md-display-2">Tab Three</h1>
+                            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        </div>
+
+        <div>
+
+        </div>
+
+        <div>
+
+        </div>
+    </div>
+
+    <div  flex="30" flex-gt-xs="30" flex-md="30" flex-gt-sm="30" flex-gt-md="30" layout-align="column">
+        <md-card style=" height: 400px; padding-left: 10px; margin-top: -1px;" class="md-whiteframe-1dp">
+            <div layout="column" layout-align="center center">
+                <div style="width:200px">
+                    <ds-widget-clock theme="dark" show-secs="true" digital-format="'hh:mm:ss a'"></ds-widget-clock>
+                </div>
+                <div>
+                    <weather-widget></weather-widget>
+                </div>
+            </div>
+        </md-card>
+    </div>
+</div>
+

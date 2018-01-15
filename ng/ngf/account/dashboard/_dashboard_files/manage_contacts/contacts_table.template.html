@@ -1,0 +1,107 @@
+<style>
+    .svg_icon{
+        fill: #3f51b5;
+    }
+</style>
+<div>
+        <md-toolbar class="md-table-toolbar md-default" ng-show="!options.rowSelection || !selected.length">
+            <div class="md-toolbar-tools">
+                <span>Contacts</span>
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" ng-click="addContact($event)">
+                    <md-tooltip md-direction="down">Add Person</md-tooltip>
+                    <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'person_add'"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="loadStuff()">
+                    <md-tooltip md-direction="down">Refresh</md-tooltip>
+                    <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'refresh'"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+                <span flex></span>
+                <md-button class="md-icon-button">
+                    <md-icon style="fill: red;" class="material-icons" ng-bind="'delete'"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                <tr md-row>
+                    <th md-column ><span></span></th>
+                    <th md-column md:order:by="name"><span>Name</span></th>
+                    <th md-column  data-md-order-by="email" data-md-desc><span>Email</span></th>
+                    <!--<th md-column  data-md-order-by="calories.value" data-md-desc><span>Email</span></th>-->
+                    <th md-column><span>Phone number</span></th>
+                    <th md-column><span flex></span></th>
+                    <th md-column><span>Favorite</span></th>
+                    <th md-column><span></span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr ng-click="viewContact(dessert);" md-row md-select="dessert" md-select-id="name" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" data-ng-repeat="dessert in desserts.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                    <td md-cell>
+                        <ng-letter-avatar data="{{dessert.name}}" shape="round" height="40px" width="40px"></ng-letter-avatar>
+                        <!--<img class="contact-avatar" style=" margin-top: 7px;width: 40px;height: 40px;" src="images/profile.jpg" />-->
+                    </td>
+                    <td md-cell>{{dessert.name}}</td>
+                    <td md-cell>
+                        {{dessert.email}}
+                    </td>
+                    <td md-cell>{{dessert.phone_number}}</td>
+                    <td md-cell>
+                        <md-button class="md-icon-button">
+                            <md-icon class="material-icons" ng-bind="'star_border'"></md-icon>
+                        </md-button>
+                    </td>
+                    <td md-cell hide-sm>
+                        <md-menu md-position-mode="target-right target" >
+                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                <md-icon class="material-icons" ng-bind="'more_vert'"></md-icon>
+                            </md-button>
+                            <md-menu-content width="3" >
+                                <md-menu-item>
+                                    <md-button ng-disabled="true">
+                                        <div layout="row" flex>
+                                            <p flex>{{dessert.type}}</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="viewContact(dessert);">
+                                        <div layout="row" flex>
+                                            <p flex>Edit</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button>
+                                        <div layout="row" flex>
+                                            <p flex>Share</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button>
+                                        <div layout="row" flex>
+                                            <p flex>Delete</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="users.current_page" md-total="{{desserts.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+
+</div>

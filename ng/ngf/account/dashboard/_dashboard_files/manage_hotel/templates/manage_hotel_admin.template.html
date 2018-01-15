@@ -1,0 +1,83 @@
+<div layout="column" layout-align="start center" flex="95" >
+    <div md-whiteframe="7">
+        <div ng-controller="allHotelCtrl">
+            <div ng-if="addEdit()">
+                <md-toolbar class="md-table-toolbar md-default" ng-show="!options.rowSelection || !selected.length">
+                    <div class="md-toolbar-tools">
+                        <span>Hotels</span>
+                        <span flex></span>
+                        <md-button class="md-icon-button md-primary" ui-sref=".add_hotel">
+                            <md-tooltip md-direction="down">Add Hotel</md-tooltip>
+                            <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'add_circle'"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="loadStuff()">
+                            <md-tooltip md-direction="down">Refresh</md-tooltip>
+                            <md-icon style="fill: #3f51b5;" class="material-icons" ng-bind="'refresh'"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <div style="background-color: white" class="md-padding">
+                    <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+                            <span flex></span>
+                            <md-button class="md-icon-button">
+                                <md-icon style="fill: red;" class="material-icons" ng-bind="'delete'"></md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-table-container>
+                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                            <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                            <tr md-row>
+                                <th md-column ><span></span></th>
+                                <th md-column md:order:by="name"><span>User</span></th>
+                                <th md-column  data-md-order-by="email" data-md-desc><span>Hotel</span></th>
+                                <th md-column><span>Phone number</span></th>
+                                <th md-column><span>Email</span></th>
+                                <th md-column><span>Country</span></th>
+                                <th md-column><span>View</span></th>
+                                <th md-column><span>Edit</span></th>
+                                <th md-column><span>Delete</span></th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="hotel" md-select-id="id" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" data-ng-repeat="hotel in hotels.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                                <td md-cell><ng-letter-avatar data="{{hotel.name}}" shape="round" height="40px" width="40px"></ng-letter-avatar></td>
+                                <td md-cell>{{hotel.name}}</td>
+                                <td md-cell>
+                                    <div layout="column">
+                                        <div>{{hotel.name}}</div>
+                                        <div style="color: #9b9a9a"><i>Hotel location</i></div>
+                                    </div>
+                                </td>
+                                <td md-cell>{{hotel.phone_number}}</td>
+                                <td md-cell>{{hotel.email}}</td>
+                                <td md-cell>{{hotel.name}}</td>
+                                <td md-cell>
+                                    <md-button class="md-icon-button">
+                                        <md-icon class="material-icons" ng-bind="'visibility'" ng-click="viewHotel(hotel);"></md-icon>
+                                    </md-button>
+                                </td>
+                                <td md-cell>
+                                    <md-button class="md-icon-button">
+                                        <md-icon class="material-icons" ng-bind="'mode_edit'" ng-click="editHotel(hotel)"></md-icon>
+                                    </md-button>
+                                </td>
+                                <td md-cell>
+                                    <md-button class="md-icon-button">
+                                        <md-icon class="material-icons" ng-bind="'delete'" ng-click="confirmDelete($event, hotel)"></md-icon>
+                                    </md-button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                    <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{hotels.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<data-ui-view></data-ui-view>
+

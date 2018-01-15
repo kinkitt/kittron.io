@@ -1,0 +1,312 @@
+<style>
+    .md-w{
+        background-color: #fff;
+    }
+
+    .head{
+        margin-bottom: 15px;
+    }
+    .head_text{
+        vertical-align: super;
+        font-size: 25px;
+        color: #ffffff;
+    }
+    .avatar_name {
+        font-size: initial;
+        vertical-align: super;
+        margin-left: 30px;
+        font-weight: 500;
+    }
+    .contact-avatar{
+        margin-bottom: 8px;
+        margin-right: 16px;
+        border-radius: 50%;
+        box-sizing: content-box;
+    }
+
+    .md-ic-small{
+        margin-top: 5px;
+        padding-left: 10px;
+    }
+</style>
+
+
+<md-content layout-align="start center" layout-xs="column">
+    <md-content style="background-image: url('images/banner.svg');">
+        <div layout="row" layout-align="start center" flex class="md-padding">
+            <div layout-align="start center">
+                <ng-md-icon icon="mail" style="fill:white;" size="30"></ng-md-icon>
+                <span class="head_text">Mails</span>
+            </div>
+            <div flex>
+
+            </div>
+            <div layout-align="center center" flex-gt-md="35" class="md-w">
+                lknjinjo
+            </div>
+            <div flex>
+
+            </div>
+        </div>
+
+        <div layout="row" layout-align="center center">
+
+            <div layout="row" flex-md="70" flex-gt-md="95" class="" >
+                <md-toolbar class="md-table-toolbar md-default" ng-show="!options.rowSelection || !selected.length">
+                    <div class="md-toolbar-tools">
+                        <span>Inbox</span>
+                        <span flex></span>
+                        <span ng-show="onSelect">
+                            <md-button class="md-icon-button md-primary" ng-click="showConfirm($event, selected)">
+                                <md-tooltip md-direction="down">Delete</md-tooltip>
+                                <md-icon style="fill: #3f51b5;" md-svg-src="images/svg/ic_delete_forever_24px.svg"></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button md-primary" ng-click="addContact($event)">
+                                <md-tooltip md-direction="down">Reply</md-tooltip>
+                                <md-icon style="fill: #3f51b5;" md-svg-src="images/svg/ic_reply_24px.svg"></md-icon>
+                            </md-button>
+                            <md-menu md-position-mode="target-right target" >
+                            <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                <md-tooltip md-direction="down">Add Person</md-tooltip>
+                                <md-icon style="fill: #3f51b5;" md-svg-src="images/svg/ic_more_vert_24px.svg"></md-icon>
+                            </md-button>
+                            <md-menu-content width="3" >
+                            <md-menu-item>
+                                <md-button>
+                                    <div layout="row" flex>
+                                        <p flex>Move</p>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="viewContact(dessert);">
+                                    <div layout="row" flex>
+                                        <p flex>Mark Unread</p>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button>
+                                    <div layout="row" flex>
+                                        <p flex>Print</p>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button>
+                                    <div layout="row" flex>
+                                        <p flex>Label</p>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                        </md-menu>
+
+                        </span>
+
+                        <md-button class="md-icon-button" ng-click="loadStuff()">
+                            <md-tooltip md-direction="down">Refresh</md-tooltip>
+                            <md-icon style="fill: #3f51b5;" md-svg-src="images/svg/ic_refresh_24px.svg"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+
+                <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+                    <div class="md-toolbar-tools">
+                        <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+                        <span flex></span>
+                        <md-button class="md-icon-button">
+                            <md-icon style="fill: red;" md-svg-src="images/svg/ic_delete_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button">
+                            <md-icon style="fill: red;" md-svg-src="images/svg/ic_folder_open_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" >
+                            <md-icon style="fill: red;" md-svg-src="images/svg/ic_more_vert_24px.svg"></md-icon>
+                        </md-button>
+
+
+
+
+                    </div>
+                </md-toolbar>
+            </div>
+
+        </div>
+
+    </md-content>
+
+    <md-content flex layout="column">
+        <div class="md-padding" layout="row">
+            <md-sidenav style="margin-right: 24px; width: 200px; height: 400px" layout="column" class=" md-sidenav-left md-whiteframe-z2" md-component-id="contactNav" md-sidenav-left md-is-locked-open="$mdMedia('gt-md')">
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <p class="md-avatar">
+                            <ng-avatar string="Barry" auto-color="true" font-weight="500" round-shape="true" width="50"></ng-avatar>
+                        </p>
+
+                        <!--<img class="md-avatar" src="images/profile.jpg"-->
+                        <!--/>-->
+                        <div class="md-list-item-text">
+                            <h3> Barry Ogbonna </h3>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item class="secondary-button-padding" ng-click="sortContact('all')">
+                        <p>All contacts</p>
+                    </md-list-item>
+
+                    <md-list-item class="secondary-button-padding" ng-click="sortContact('friends')">
+                        <p>Friends</p>
+                    </md-list-item>
+
+                    <md-list-item class="secondary-button-padding" ng-click="sortContact('clients')">
+                        <p>Clients</p>
+                    </md-list-item>
+
+                    <md-list-item class="secondary-button-padding" ng-click="sortContact('contacted')">
+                        <p>Recently Contacted</p>
+                    </md-list-item>
+
+                    <md-list-item class="secondary-button-padding" ng-click="sortContact('workers')">
+                        <p>Workers</p>
+                    </md-list-item>
+
+                    <md-list-item class="secondary-button-padding"ng-click="sortContact('vendors')">
+                        <p>Vendors</p>
+                    </md-list-item>
+                </md-list>
+            </md-sidenav>
+
+            <div flex flex-gt-md="40" class="md-whiteframe-1dp md-padding md-w">
+
+                <div>
+
+
+                    <md-table-container>
+                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                            <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                            <tr md-row>
+                                <th md-column ></th>
+                                <th md-column md:order:by="name"><span style="width: 900px;"></span></th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr ng-click="selectMail(dessert);" md-row md-select="dessert" md-select-id="name" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" data-ng-repeat="dessert in desserts.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                                <td md-cell>
+                                </td>
+                                <td md-cell style="width: 900px;">
+                                    <div layout="row" layout-align="start space_between" style="padding-top: 5px;padding-bottom: 5px;">
+                                    <div flex layout="column">
+                                        <div layout="row" layout-align="start center">
+                                            <span style="padding-right: 10px;">
+                                            <ng-avatar bind="true" string="{{ dessert.name }}" auto-color="true" font-weight="500" round-shape="true" width="40"></ng-avatar>
+                                            </span>
+                                            <span style="font-weight:bold ">
+                                                {{dessert.name}}
+                                            </span>
+                                            <span class="md-ic-small">
+                                                <ng-md-icon icon="attachment" size="15" style="fill:#7d7d7d;"></ng-md-icon>
+                                            </span>
+                                        </div>
+                                        <span>
+                                            <b>subject</b>
+                                        </span>
+                                        <span>
+                                            {{dessert.name}}kuitiuhkiugiohoighioihiiuufgiugugugoiugoigiji0jjiijiijijjiiij
+                                        </span>
+                                    </div>
+                                    <div layout="column" layout-align="end end" style="margin-bottom: 29px">
+                                        date
+                                    </div>
+                                    </div>
+
+
+                                </td>
+
+                                <!--<td md-cell hide-sm>-->
+                                    <!--<md-menu md-position-mode="target-right target" >-->
+                                        <!--<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">-->
+                                            <!--<md-icon md-svg-src="images/svg/ic_more_vert_24px.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                        <!--<md-menu-content width="3" >-->
+                                            <!--<md-menu-item>-->
+                                                <!--<md-button ng-disabled="true">-->
+                                                    <!--<div layout="row" flex>-->
+                                                        <!--<p flex>{{dessert.type}}</p>-->
+                                                    <!--</div>-->
+                                                <!--</md-button>-->
+                                            <!--</md-menu-item>-->
+                                            <!--<md-menu-item>-->
+                                                <!--<md-button ng-click="viewContact(dessert);">-->
+                                                    <!--<div layout="row" flex>-->
+                                                        <!--<p flex>Edit</p>-->
+                                                    <!--</div>-->
+                                                <!--</md-button>-->
+                                            <!--</md-menu-item>-->
+                                            <!--<md-menu-item>-->
+                                                <!--<md-button>-->
+                                                    <!--<div layout="row" flex>-->
+                                                        <!--<p flex>Share</p>-->
+                                                    <!--</div>-->
+                                                <!--</md-button>-->
+                                            <!--</md-menu-item>-->
+                                            <!--<md-menu-item>-->
+                                                <!--<md-button>-->
+                                                    <!--<div layout="row" flex>-->
+                                                        <!--<p flex>Delete</p>-->
+                                                    <!--</div>-->
+                                                <!--</md-button>-->
+                                            <!--</md-menu-item>-->
+                                        <!--</md-menu-content>-->
+                                    <!--</md-menu>-->
+                                <!--</td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+
+                    <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+
+                </div>
+
+            </div>
+
+            <div flex flex-gt-md="40" class="md-whiteframe-1dp md-w" style=" padding-left: 10px;" layout="row">
+                <div style="height: 100%; width: 100%;opacity: 0.3;" layout-align="center center" layout="column"  ng-hide="onSelect">
+                    <span>
+                        <ng-md-icon icon="mail_outline" size="100"></ng-md-icon>
+                    </span>
+                    <span style="font-size: medium">
+                        Select a message to read
+                    </span>
+                </div>
+
+                <div ng-show="onSelect"  class="md-padding">
+                    <div ng-controller="MessageViewController">
+                    <div layout="row" layout-align="start space_between">
+                        <div layout="column" layout-align="start center" style="padding-right: 5px;">
+                            <ng-avatar bind="true" string="{{ selected.name }}" auto-color="true" font-weight="500" round-shape="true" width="90"></ng-avatar>
+                            <!--<p ng-bind-html="avatarValue"></p>-->
+                        </div>
+                        <div layout="column" layout-align="end center" flex>
+                                {{selected.name}}
+                            </p>
+                            <p layout="row">
+                                {{selected.name}}
+                            </p>
+                            <p layout="row">
+                                {{selected.name}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+        </div>
+    </md-content>
+
+</md-content>

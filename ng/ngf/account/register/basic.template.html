@@ -1,0 +1,90 @@
+
+
+<!--full name-->
+<div layout="row">
+    <md-input-container flex="50">
+        <label>First Name</label>
+        <input name="firstName" placeholder="First name" ng-model="userData.first_name" ng-minlength="3" ng-maxlength="10" required>
+        <div ng-messages="registerForm.firstName.$error">
+            <div ng-message="required">First Name is required.</div>
+            <div ng-message="maxlength" >Your First Name is too long.</div>
+            <div ng-message="minlength">Your First Name is too short.</div>
+        </div>
+
+    </md-input-container>
+    <md-input-container flex="50">
+        <label>Last Name</label>
+        <input name="lastName" placeholder="Last name" ng-model="userData.last_name" ng-minlength="3" ng-maxlength="10" required>
+        <div ng-messages="registerForm.lastName.$error">
+            <div ng-message="required">Last Name is required.</div>
+            <div ng-message="minlength">Your Last Name is too short.</div>
+            <div ng-message="maxlength" >Your Last Name is too long.</div>
+        </div>
+    </md-input-container>
+
+</div>
+<div layout="column">
+<md-input-container class="md-block">
+    <label>Email</label>
+    <md-icon class="material-icons">email</md-icon>
+    <input type="email" name="email" placeholder="Email (required)" ng-model="userData.email"  email-validator data-ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="80" required>
+    <div ng-messages="registerForm.email.$error">
+        <div ng-message="required">Email is required.</div>
+        <div ng-message="email">Please enter a valid real e-mail address.</div>
+        <div ng-message="emailavail">This e-mail already exist.</div>
+        <div ng-message="minlength">Too short.</div>
+        <div ng-message="maxlength">Too long.</div>
+    </div>
+    <div data-ng-show="registerForm.email.$pending">
+        please wait...
+    </div>
+</md-input-container>
+
+<md-input-container class="md-block">
+    <label>Password</label>
+    <md-icon class="material-icons">lock</md-icon>
+    <input type="password" name="pass"  placeholder="Passoword" password-validate ng-model="userData.password" ng-pattern=""  ng-required="true">
+    <div ng-messages="registerForm.pass.$error">
+            <div ng-message="required">Password is required.</div>
+            <div ng-message="password">Please enter valid password.</div>
+    </div>
+</md-input-container>
+
+<md-input-container class="md-block">
+    <label>Contact number</label>
+    <md-icon class="material-icons">phone</md-icon>
+    <input type="text" name="cont"  placeholder="Contact Number" number-validate ng-model="userData.number"  ng-minlength="11" ng-maxlength="15"  ng-required="true">
+    <div ng-messages="registerForm.cont.$error">
+            <div ng-message="required">Contact number is required.</div>
+            <div ng-message="telephone">Please enter a valid contact number.</div>
+            <div ng-message="minlength">Too short.</div>
+            <div ng-message="maxlength">Too long.</div>
+    </div>
+</md-input-container>
+
+    <div>
+        <label>Date of Birth</label>
+        <md-input-container>
+            <md-datepicker ng-model="userData.dob" md-placeholder="Enter date"  name="dateField" min="1947-01-01" max="1998-12-31" required></md-datepicker>
+            <div ng-messages="registerForm.dateField.$error">
+                <div ng-message="valid">The entered value is not a date!</div>
+                <div ng-message="required">Date of Birth is required!</div>
+                <div ng-message="min">Date is too early!</div>
+                <div ng-message="max">Date is too late!</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <md-radio-group ng-model="userData.gender">
+        <md-radio-button value="Male" class="md-primary">Male </md-radio-button>
+        <md-radio-button   value="Female" > Female</md-radio-button>
+    </md-radio-group>
+    
+      <country-state-select country="userData.country" state="userData.state" country-label="Country" country-select-label="Select your country" state-label="State"  ></country-state-select>
+
+
+    </div>
+<div flex layout="column" layout-align="center center">
+    <md-button class="md-primary md-raised md-hue-2 pull-right clearfix" ng-disabled="registerForm.$invalid" ng-click="signUp()">Sign me up</md-button>
+    <!--<md-button class="md-primary md-raised md-hue-2 pull-right clearfix" ng-disabled="registerForm.$invalid" ui-sref="register.business">Next</md-button>-->
+</div>

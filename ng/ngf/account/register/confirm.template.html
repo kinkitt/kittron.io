@@ -1,0 +1,37 @@
+<!--<div class="panel panel-info">-->
+    <!--<div class="panel-heading">User agreement</div>-->
+    <!--<div class="panel-body">onkew</div>-->
+    <!--<div class="panel-footer">-->
+        <!--<div class="clearfix">-->
+            <!--<input type="checkbox"> i agree to your terms and conditions.-->
+            <!--</label>-->
+            <!--<span class="pull-right"><button class="btn btn-primary" >Sign Up</button></span>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<md-card>
+    <md-card-header>
+        <md-card-header-text>
+            <span class="md-title">User Agreement</span>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline"></span>
+            <span class="md-subhead">Description</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="start center">
+        <md-button></md-button>
+        <md-button></md-button>
+    </md-card-actions>
+    <md-card-content>
+        <p class="clearfix">
+            <md-checkbox ng-model="userData.type1" ng-true-value="'Yes'" ng-false-value="'No'" class="md-warn md-align-top-left" flex>
+                <span> i agree to your terms and conditions. </span>
+            </md-checkbox>
+            <md-button class="md-accent md-raised md-hue-2 pull-right clearfix" ng-click="signUp()" >Sign Up</md-button>
+        </p>
+    </md-card-content>
+</md-card>

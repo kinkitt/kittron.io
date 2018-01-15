@@ -1,0 +1,249 @@
+<style>
+	.kr-board{
+		 display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+   
+	}
+	.kr-board.ng-move,
+.kr-board.ng-enter,
+.kr-board.ng-leave {
+  transition:all linear 0.9s;
+}
+
+.kr-board.ng-leave.ng-leave-active,
+.kr-board.ng-move,
+.kr-board.ng-enter {
+  opacity:0;
+ 	-webkit-animation-name: hvr-wobble-to-bottom-right;
+    animation-name: hvr-wobble-to-bottom-right;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+
+}
+
+.kr-board.ng-leave,
+.kr-board.ng-move.ng-move-active,
+.kr-board.ng-enter.ng-enter-active {
+	-webkit-animation-name: hvr-wobble-to-bottom-right;
+    animation-name: hvr-wobble-to-bottom-right;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+
+  opacity:1;
+  font-size:px;
+  
+}
+@-webkit-keyframes hvr-wobble-to-bottom-right {
+    16.65% {
+        -webkit-transform: translate(8px, 8px);
+        transform: translate(8px, 8px);
+    }
+    33.3% {
+        -webkit-transform: translate(-6px, -6px);
+        transform: translate(-6px, -6px);
+    }
+    49.95% {
+        -webkit-transform: translate(4px, 4px);
+        transform: translate(4px, 4px);
+    }
+    66.6% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
+    83.25% {
+        -webkit-transform: translate(1px, 1px);
+        transform: translate(1px, 1px);
+    }
+    100% {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
+@keyframes hvr-wobble-to-bottom-right {
+    16.65% {
+        -webkit-transform: translate(8px, 8px);
+        transform: translate(8px, 8px);
+    }
+    33.3% {
+        -webkit-transform: translate(-6px, -6px);
+        transform: translate(-6px, -6px);
+    }
+    49.95% {
+        -webkit-transform: translate(4px, 4px);
+        transform: translate(4px, 4px);
+    }
+    66.6% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
+    83.25% {
+        -webkit-transform: translate(1px, 1px);
+        transform: translate(1px, 1px);
+    }
+    100% {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+
+</style>
+<div ng-controller="EventPlannerResultCtrl">
+	<md-card flex="100">
+		<div layout="row" layout-align="center space-between" class="md-padding">
+		<span>
+			<md-button ng-disabled="true">
+			Sort
+			<md-icon class="material-icons">sort</md-icon>
+			</md-button>
+		</span>
+			<span layout="row">
+			<md-button ng-click="sortPrice('price')">
+			Price
+				<md-icon ng-show="price_trending_up" class="material-icons">trending_up</md-icon>
+				<md-icon ng-show="!price_trending_up" class="material-icons">trending_down</md-icon>
+			</md-button>
+			<md-button ng-click="sortRating('rating')">
+			Rating
+				<md-icon ng-show="rating_trending_up" class="material-icons">trending_up</md-icon>
+				<md-icon ng-show="!rating_trending_up" class="material-icons">trending_down</md-icon>
+			</md-button>
+		</span>
+		</div>
+	</md-card>
+
+	<md-content class="md-padding" layout-xs="column" layout="row">
+		<div flex="70" flex-gt-xs="100" flex-xs="100" flex-gt-md="70" flex-gt-sm="70" layout="column" >
+			<md-card class="kr-board" dir-paginate="board in board  | filter:rating:price |filter:myFunc | itemsPerPage: 3"  class="hvr-forward md-whiteframe-2dp" >
+				<md-card-title>
+					<md-card-title-text>
+						<div layout="row">
+							<span class="md-headline">{{board.name}}</span>
+							<span flex>
+
+							</span>
+							<span class="md-subhead" layout-align="end" >
+                                <md-icon  class="material-icons" aria-label="Rating">star</md-icon>{{board.rating}}<b>/10</b>
+									</span>
+							<span flex>
+
+									</span>
+							<span>
+										<md-icon  class="material-icons" style="" aria-label="beenhere">beenhere</md-icon>{{board.visits}} visited.
+
+									</span>
+							<span>
+										{{board.price}}
+									</span>
+							<span flex>
+									</span>
+						</div>
+
+						<span class="md-subhead">{{board.type}}</span>
+						<div layout="row" layout-align="center center" >
+                                    <span class="md-subhead" layout-align="">
+                                    <md-button class="md-icon-button" aria-label="Search" ng-click="show_on_map(board.location.geo);">
+									<md-icon class="material-icons" aria-label="map direction"><md-tooltip md-direction="buttom">View on map</md-tooltip>directions</md-icon></md-button>{{board.location.add}}
+                                    </span>
+							<span flex>
+
+                                    </span>
+
+							<span ng-if="board.offer">
+										<md-icon class="material-icons" style="color:red;" aria-label="loyalty"><md-tooltip md-direction="buttom">loyality</md-tooltip>loyalty</md-icon>{{board.offer}}
+									</span>
+							<span flex>
+									</span>
+						</div>
+						<span class="md-subhead">{{board.discription}}</span>
+					</md-card-title-text>
+					<md-card-title-media >
+						<div class="md-media-lg card-media">
+							<img ng-src="uploads/{{board.img}}" width="152px" height="152px" image-404 fb-bgcolor="#C0392B" fb-color="#C5EFF7" fb-text="Not Found">
+						</div>
+					</md-card-title-media>
+				</md-card-title>
+				<md-card-actions layout="row" layout-align="end center">
+					<p>
+						<md-icon ng-if="hasFacicility(board.facility,'wifi')" class="material-icons"  aria-label="wifi"><md-tooltip md-direction="buttom">Free wifi</md-tooltip>wifi_tethering</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Shuttle')" class="material-icons"  aria-label="airport shuttle"><md-tooltip md-direction="buttom">Airport shuttle</md-tooltip>airport_shuttle</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Pool')" class="material-icons"  aria-label="Swimming pool"><md-tooltip md-direction="buttom">Swimming pool</md-tooltip>pool</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Air conditioned')" class="material-icons" aria-label="Air conditioned"><md-tooltip md-direction="buttom">Air conditioned</md-tooltip>ac_unit</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Room Service')" class="material-icons" aria-label="Room service"><md-tooltip md-direction="buttom">Room service</md-tooltip>room_service</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Breakfast')" class="material-icons" aria-label="Breakfast"><md-tooltip md-direction="buttom">Free Breakfast</md-tooltip>free_breakfast</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Restaurant')" class="material-icons" aria-label="Restaurant"><md-tooltip md-direction="buttom">Restaurant</md-tooltip>restaurant</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Local Bar')" class="material-icons" aria-label="Local bar"><md-tooltip md-direction="buttom">Local Bar</md-tooltip>local_bar</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Free cancellation')" class="material-icons" aria-label="Security"><md-tooltip md-direction="buttom">Security</md-tooltip>backspace</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Kitchen')" class="material-icons" aria-label="Security"><md-tooltip md-direction="buttom">Security</md-tooltip>kitchen</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Gym')" class="material-icons" aria-label="Security"><md-tooltip md-direction="buttom">Security</md-tooltip>fitness_center</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Bath Tub')" class="material-icons" aria-label="Speakers"><md-tooltip md-direction="buttom">hot_tub</md-tooltip>hot_tub</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Spa')" class="material-icons" aria-label="Speakers"><md-tooltip md-direction="buttom">Speakers</md-tooltip>spa</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Smoking Room')" class="material-icons" aria-label="Speakers"><md-tooltip md-direction="buttom">smoking_rooms</md-tooltip>speaker_group</md-icon>
+						<md-icon ng-if="hasFacicility(board.facility,'Smoke Free')" class="material-icons" aria-label="Speakers"><md-tooltip md-direction="buttom">smoke_free</md-tooltip>speaker_group</md-icon>
+					</p>
+					<span flex>
+
+                        </span>
+					<md-button class="md-raised md-primary" ng-href="http://{{board.siteUrl}}">Visit</md-button>
+				</md-card-actions>
+			</md-card>
+		</div>
+
+		<md-card flex="30" >
+			<h3 style="text-align:center;" class="md-">Filter</h3>
+
+
+
+
+			<div layout>
+				<md-input-container >
+					<label>Price start</label>
+					<md-icon class="material-icons">place</md-icon>
+					<input ng-model="ud" type="number">
+				</md-input-container>
+			</div>
+
+			<div layout>
+				<div flex="30" layout layout-align="center center">
+					<span class="md-body-1">Price range</span>
+				</div>
+				<md-slider flex md-discrete ng-model="price" step="1" min="{{priceMin}}" max="20" aria-label="price">
+				</md-slider>
+			</div>
+
+			<div layout>
+				<div flex="30" layout layout-align="center center">
+					<span class="md-body-1">Rating</span>
+				</div>
+				<md-slider flex md-discrete ng-model="rating" step="1" min="1" max="10" aria-label="rating">
+				</md-slider>
+			</div>
+
+			<div>
+				<h3 style="text-align:center; font-size:17px;">Facilities</h3>
+				<div layout-wrap layout-gt-sm="row" class="md-padding">
+
+					<div flex-gt-sm="50" ng-repeat="facility in facilities">
+						<md-checkbox ng-model="facility.on" ng-change="checkChange(facility.name)" aria-label="Check {{facility.name}}">
+							<md-icon class="material-icons">{{facility.icon}}</md-icon>{{facility.name}}
+						</md-checkbox>
+					</div>
+
+				</div>
+
+			</div>
+
+		</md-card>
+	</md-content>
+	<div dir-pagination-controls></div>
+</div>

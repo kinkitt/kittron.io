@@ -1,0 +1,21 @@
+
+<div data-ng-controller="viewHotelCtrl">
+    <md-content>
+        <md-nav-bar  md-no-ink-bar="'true'" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+            <md-nav-item md-nav-sref=".basic" name="dashboard.manage_hotel.view_hotel.basic">
+                Basic Info
+            </md-nav-item>
+            <md-nav-item md-nav-sref=".public" name="dashboard.manage_hotel.view_hotel.public">
+                Public Info
+            </md-nav-item>
+            <md-nav-item md-nav-sref=".policy" name="dashboard.manage_hotel.view_hotel.policy">
+                Policy
+            </md-nav-item>
+            <md-nav-item md-nav-sref=".paybill" name="dashboard.manage_hotel.view_hotel.paybill">Payment & Billing</md-nav-item>
+       <md-button ng-click="reload()"><md-tooltip md-direction="down">Refresh</md-tooltip><md-icon class="material-icons" ng-bind="'refresh'"></md-icon></md-button>
+        </md-nav-bar>
+        <div class="ext-content md-margin">
+            <data-ui-view></data-ui-view>
+        </div>
+    </md-content>
+</div>

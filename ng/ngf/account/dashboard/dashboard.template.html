@@ -1,0 +1,164 @@
+<style type="text/css">
+    #container{
+        /*width : 100px;*/
+        height : 583px;
+        /*border : 1px solid blue;*/
+        position: relative;
+        /*margin: 5px;*/
+    }
+</style>
+<div ng-controller="DashboardCtrl as dc">
+        <!--Left side nav-->
+
+    <md-content flex layout="column">
+        <div>
+            <md-content class="md-theme-light" layout="row">
+                <md-button class="md-icon-button" layout-align="" ng-click="dc.toggleLeft()">
+                    <md-icon class="material-icons" ng-bind="'menu'"></md-icon>
+                </md-button>
+                <span flex>
+
+                </span>
+                <md-button class="md-icon-button" layout-align="center end" ng-click="dc.toggleRight()">
+                    <md-icon class="material-icons" ng-bind="'settings'"></md-icon>
+                </md-button>
+            </md-content>
+        </div>
+    </md-content>
+    <md-content>
+        <div layout="row">
+            <div flex="100" layout="column" id="container">
+                <ui-view></ui-view>
+            </div>
+
+            <md-sidenav layout="column" class=" md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="false">
+                <div class="md-tall md-hue-2">
+                    <span flex></span>
+                    <div layout="column" class="md-toolbar-tools-bottom inset" style="background-image: url('images/user_banner_2.png');">
+                        <div layout="row" layout-align="space-around center">
+                            <div>
+                                <ng-avatar bind="true" string="{{ rdata.userProfile.first_name}}" text-shadow="true" upper-case="true" auto-color="true" font-weight="500" round-shape="true" width="70"></ng-avatar>
+                            </div>
+                            <div>
+                                <md-button class="md-raised">Profile</md-button>
+                            </div>
+                        </div>
+                        <span></span>
+                        <div style="color: #ffffff; font-size: 20px;">
+                            <div ng-bind-template="{{ rdata.userProfile.first_name | ucfirst}} {{ rdata.userProfile.last_name | ucfirst}}"></div>
+                            <div>{{ rdata.userProfile.email }}</div>
+                        </div>
+                    </div>
+                </div>
+                <md-list flex>
+                    <md-list-item ng-repeat="leftNavItem in dc.leftNavItem" ng-click="dc.goToState(leftNavItem.ref, $index)" class="noright" ng-class="{active: dc.selectedIndex===$index}">
+                        <md-icon class="material-icons" data-ng-bind="leftNavItem.icon"></md-icon>
+                        <p class="md-subhead" data-ng-bind="leftNavItem.name"></p>
+                    </md-list-item>
+                </md-list>
+                <div>
+
+                    <!--<md-button  layout="column" layout-align="center center"-->
+                                <!--flex class="capitalize" ng-click=""-->
+                                <!--ui-sref-active="md-warn" ui-sref="dashboard.reports">-->
+                        <!--<div class="md-tile-content">-->
+                            <!--Reports-->
+                            <!--<md-icon class="material-icons" ng-bind="'report'"></md-icon>-->
+                        <!--</div>-->
+                    <!--</md-button>-->
+
+                    <!--<md-button  layout="column" layout-align="center center"-->
+                                <!--flex class="capitalize" ng-click=""-->
+                                <!--ui-sref-active="md-warn" ui-sref="dashboard.app_tour">-->
+                        <!--<div class="md-tile-content">-->
+                            <!--App tour-->
+                            <!--<md-icon class="material-icons" ng-bind="'explore'"></md-icon>-->
+                        <!--</div>-->
+                    <!--</md-button>-->
+
+                    <!--<md-button  layout="column" layout-align="center center"-->
+                                <!--flex class="capitalize" ng-click="vm.selectItem(item)"-->
+                                <!--ui-sref-active="md-warn" ui-sref="dashboard.mail_box">-->
+                        <!--<div class="md-tile-content">-->
+                            <!--Mail Box-->
+                            <!--<md-icon class="material-icons" ng-bind="'inbox'"></md-icon>-->
+                        <!--</div>-->
+                    <!--</md-button>-->
+
+                    <!--<md-button  layout="column" layout-align="center center"-->
+                                <!--flex class="capitalize" ng-click="vm.selectItem(item)"-->
+                                <!--ui-sref-active="md-warn" ui-sref="dashboard.manage_events">-->
+                        <!--<div class="md-tile-content">-->
+                            <!--Manage Events-->
+                            <!--<md-icon class="material-icons" ng-bind="'event'"></md-icon>-->
+                        <!--</div>-->
+                    <!--</md-button>-->
+
+                    <!--<md-button  layout="column" layout-align="center center"-->
+                                <!--flex class="capitalize" ng-click="vm.selectItem(item)"-->
+                                <!--ui-sref-active="md-warn" ui-sref="dashboard.contacts">-->
+                        <!--<div  class="md-tile-content">-->
+                            <!--Manage Contacts-->
+                            <!--<md-icon class="material-icons" ng-bind="'contacts'"></md-icon>-->
+                        <!--</div>-->
+                    <!--</md-button>-->
+
+                    <!--<md-button  layout="column" layout-align="center center"-->
+                                <!--flex class="capitalize" ng-click="vm.selectItem(item)"-->
+                                <!--ui-sref-active="md-warn" ui-sref="dashboard.manage_site">-->
+                        <!--<div class="md-tile-content">-->
+                            <!--Manage Site-->
+                            <!--<md-icon class="material-icons" ng-bind="'public'"></md-icon>-->
+                        <!--</div>-->
+                    <!--</md-button>-->
+
+                    <!--<md-divider>-->
+                    <!--</md-divider>-->
+
+                    <!--<div>-->
+                        <!--<md-button  layout="column" layout-align="center center"-->
+                                    <!--flex class="capitalize" ng-click="vm.selectItem(item)"-->
+                                    <!--ui-sref-active="md-warn" ui-sref="dashboard.manage_hotel">-->
+                            <!--<div class="md-tile-content">-->
+                                <!--Manage Hotel-->
+                                <!--<md-icon class="material-icons" ng-bind="'location_city'"></md-icon>-->
+                            <!--</div>-->
+                        <!--</md-button>-->
+                        <!--<md-button  layout="column" layout-align="center center"-->
+                                    <!--flex class="capitalize" ng-click="vm.selectItem(item)"-->
+                                    <!--ui-sref-active="md-warn" ui-sref="dashboard.users">-->
+                            <!--<div class="md-tile-content">-->
+                                <!--Users-->
+                                <!--<md-icon class="material-icons" ng-bind="'people'"></md-icon>-->
+                            <!--</div>-->
+                        <!--</md-button>-->
+                    <!--</div>-->
+                </div>
+
+            </md-sidenav>
+
+            <md-sidenav  layout="column" class="md-sidenav-right md-whiteframe-z2"  md-component-id="right" md-is-locked-open="false">
+                    <md-content class="md-padding" layout-align="center center">
+                        <md-tabs md-border-bottom>
+                            <md-tab label="{{tab.title}} prefrence">
+                                <div class="" style="padding: 25px;">
+                                    <div>settings</div>
+                                    <br/>
+                                </div>
+                            </md-tab>
+                            <md-tab label="{{tab.title}} settings">
+                                <div class="" style="padding: 25px; text-align: center;">
+                                    <div>preference</div>
+                                    <br/>
+                                </div>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+
+                </md-sidenav>
+
+        </div>
+    </md-content>
+</div>
+
+

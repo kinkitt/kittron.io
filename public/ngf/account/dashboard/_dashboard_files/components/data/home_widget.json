@@ -1,0 +1,43 @@
+{
+  "name":"Dashboard_Home",
+  "resizeableColumns":false,
+  "dynamicColumns":false,
+  "columns": [
+
+    {
+      "name": "column1",
+      "background": "#ffffff",
+      "size": 50,
+      "widgets":[
+        {
+          "name": "visits",
+          "title": "VIsits",
+          "type": "include",
+          "content": "/ngf/account/dashboard/_dashboard_files/components/templates/home_visits.template.html",
+          "refresh": 10,
+          "resize": true,
+          "minHeight": "auto",
+          "maxHeight": "auto",
+          "sticky": false,
+          "fullscreenControl": false,
+          "closeControl" : false,
+          "stickyControl": true,
+          "customActions": [{"name": "android", "icon": "android", "event": "show_me_android", "tooltip": "A custom action"}]
+        },
+        {"name": "report_2", "title": "Report Two", "type": "include", "content": "/example/data/widgets/report_1.html", "refresh": 10, "resize": true, "minHeight": "auto", "maxHeight": "auto", "closeControl" : false,"sticky" : true}
+      ]
+    },
+
+    {
+      "name": "column2",
+      "size": 50,
+      "background": "#ffffff",
+      "widgets":[
+        {"name": "report_3", "title": "Report Three", "type": "include", "content": "/example/data/widgets/report_1.html", "refresh": 10, "resize": true, "minHeight": "auto", "maxHeight": "200"},
+        {"name": "report_4", "title": "Report Four", "type": "include", "content": "/example/data/widgets/report_2.html", "refresh": 10, "resize": true, "minHeight": "auto", "maxHeight": "auto"},
+        {"name": "report_5", "title": "Report Five", "type": "include", "content": "/example/data/widgets/report_1.html", "refresh": 10, "resize": true, "minHeight": "auto", "maxHeight": "auto"}
+      ]
+    }
+
+  ]
+}

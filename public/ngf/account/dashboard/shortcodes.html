@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  
+<head>
+    <meta charset="utf-8">
+    <title>Account - Bootstrap Admin Template</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    
+    <link href="fcss/style.css" rel="stylesheet">
+   
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+
+<body>
+
+
+<style type="text/css">
+    .form-body {
+        max-width:550px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+    }
+    .form input{
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+    }
+
+    .form-footer{
+        padding-top: 17px;
+        padding-right: 40px;
+        padding-bottom: 4px;
+        padding-left: 70px;
+        margin-top: 18px;
+        margin-bottom: 18px;
+        /* background-color: #eeeeee; */
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    .bootstrapWizard {
+        display: block;
+        list-style: none;
+        padding: 0;
+        position: relative;
+        width: 100%
+    }
+
+    .bootstrapWizard a:hover,.bootstrapWizard a:active,.bootstrapWizard a:focus {
+        text-decoration: none
+    }
+
+    .bootstrapWizard li {
+        display: block;
+        float: left;
+        width: 25%;
+        text-align: center;
+        padding-left: 0
+    }
+
+    .bootstrapWizard li:before {
+        border-top: 3px solid #55606E;
+        content: "";
+        display: block;
+        font-size: 0;
+        overflow: hidden;
+        position: relative;
+        top: 11px;
+        right: 1px;
+        width: 100%;
+        z-index: 1
+    }
+
+    .bootstrapWizard li:first-child:before {
+        left: 50%;
+        max-width: 50%
+    }
+
+    .bootstrapWizard li:last-child:before {
+        max-width: 50%;
+        width: 50%
+    }
+
+    .bootstrapWizard li.complete .step {
+        background: #0aa66e;
+        padding: 1px 6px;
+        border: 3px solid #55606E
+    }
+
+    .bootstrapWizard li .step i {
+        font-size: 10px;
+        font-weight: 400;
+        position: relative;
+        top: -1.5px
+    }
+
+    .bootstrapWizard li .step {
+        background: #B2B5B9;
+        color: #fff;
+        display: inline;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 12px;
+        padding: 7px 13px;
+        border: 3px solid transparent;
+        border-radius: 50%;
+        line-height: normal;
+        position: relative;
+        text-align: center;
+        z-index: 2;
+        transition: all .1s linear 0s
+    }
+
+    .bootstrapWizard li.active .step,.bootstrapWizard li.active.complete .step {
+        background: #0091d9;
+        color: #fff;
+        font-weight: 700;
+        padding: 7px 13px;
+        font-size: 15px;
+        border-radius: 50%;
+        border: 3px solid #55606E
+    }
+
+    .bootstrapWizard li.complete .title,.bootstrapWizard li.active .title {
+        color: #2B3D53
+    }
+
+    .bootstrapWizard li .title {
+        color: #bfbfbf;
+        display: block;
+        font-size: 13px;
+        line-height: 15px;
+        max-width: 100%;
+        position: relative;
+        table-layout: fixed;
+        text-align: center;
+        top: 20px;
+        word-wrap: break-word;
+        z-index: 104
+    }
+
+    .wizard-actions {
+        display: block;
+        list-style: none;
+        padding: 0;
+        position: relative;
+        width: 100%
+    }
+
+    .wizard-actions li {
+        display: inline
+    }
+
+    .tab-content.transparent {
+        background-color: transparent
+    }
+
+</style>
+<script type="text/javascript">
+
+</script>
+<div class="form-body">
+    <div class="container form-body">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div id="wid-id-0">
+                    <header role="heading">
+                        <h2>Please fill details to register  </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <!-- widget content -->
+                        <div class="widget-body">
+
+                            <div class="row">
+                                <form id="wizard-1" novalidate="novalidate" class="form-horizontal">
+                                    <div id="bootstrap-wizard-1" class="col-sm-12">
+                                        <div class="form-bootstrapWizard">
+                                            <ul class="bootstrapWizard form-wizard">
+                                                <li class="active" data-target="#step1">
+                                                    <a href="#tab1" data-toggle="tab" class="active"> <span class="step">1</span> <span class="title">Basic information</span> </a>
+                                                </li>
+                                                <li data-target="#step2" class="">
+                                                    <a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">Business information</span> </a>
+                                                </li>
+                                                <li data-target="#step3" class="">
+                                                    <a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">Website Setup</span> </a>
+                                                </li>
+                                                <li data-target="#step4">
+                                                    <a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Save Form</span> </a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab1">
+                                                <br>
+                                                <hr>
+                                                <div class="container form-body">
+                                                    <p><strong>Step 1 </strong> - Basic Information</p>
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="inputEmail">Name</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="inputName" placeholder="First and last name (Sam Dean)">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="inputEmail">Email</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="inputEmail" placeholder="Valid email address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Contact Number</label>
+                                                        <div class="controls">
+                                                        <input type="text" name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Date of Birth</label>
+                                                        <div class="controls">
+                                                        <input type="text" name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-inline control-group">
+                                                        <div class="controls">
+                                                        <label class="checkbox inline">Sex: </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Male
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Female
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Country</label>
+                                                        <div class="controls">
+                                                            <select type="text" name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">State</label>
+                                                        <div class="controls">
+                                                            <select name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-footer">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <ul class="pager wizard no-margin">
+                                                                <li class="next">
+                                                                    <a href="#" class="btn btn-lg txt-color-darken"> Next </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab2">
+                                                <br>
+                                                <hr>
+                                                <div class="container form-body">
+                                                    <p><strong>Step 2 </strong> - Business Information</p>
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="inputEmail">Business Name</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="businessName" placeholder="Your Business name ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label>Registered? </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Yes
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="inputEmail">Custom Email</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="inputEmail" placeholder="xyz@kr.com" disabled>
+                                                            <br>
+                                                            <i>This is your customized email address for mailing and marketing purposes</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="control-group">
+                                                        <label class="control-label">Contact Number</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Work Number</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-horizontal control-group">
+                                                        <div class="controls">
+                                                            <label>Whats your type of event planning? </label>
+                                                            <label class="checkbox ">
+                                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Full service Planning
+                                                            </label>
+                                                            <label class="checkbox ">
+                                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Day of Event Planning
+                                                            </label>
+                                                            <label class="checkbox ">
+                                                                <input type="checkbox" id="inlineCheckbox2" value="option2">Planning Only
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Country</label>
+                                                        <div class="controls">
+                                                            <select type="text" name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">State</label>
+                                                        <div class="controls">
+                                                            <select name="lastName" placeholder="Last Name" class="form-control" ng-model="rc.register.lastName" ng-required="true"/>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-footer">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <ul class="pager wizard no-margin">
+                                                                <li class="previous">
+                                                                    <a href="#" class="btn btn-lg btn-default"> Previous </a>
+                                                                </li>
+                                                                <li class="next disabled">
+                                                                    <a href="#" class="btn btn-lg txt-color-darken"> Next </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab3">
+                                                <br>
+                                                <hr>
+                                                <div class="container form-body">
+                                                <p><strong>Step 3</strong> - Website Setup</p>
+                                                    <div class="control-group">
+                                                        <div class="controls input-append">
+                                                            <label>Enter your desired website name ()</label>
+                                                            <input class="span2" id="" placeholder="Enter a name" type="text">
+                                                            <span class="add-on">.kr.com</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="control-group">
+                                                            <label class="control-label">Business Description</label>
+                                                            <div class="controls">
+                                                                <textarea rows="5" placeholder="Say something about your business!"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-footer">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <ul class="pager wizard no-margin">
+                                                                <li class="previous">
+                                                                    <a href="#" class="btn btn-lg btn-default"> Previous </a>
+                                                                </li>
+                                                                <li class="next disabled">
+                                                                    <a href="#" class="btn btn-lg txt-color-darken"> Next </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab4">
+                                                <br>
+                                                <p><strong>Step 4</strong> - Save Form</p>
+                                                <br>
+                                                <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
+                                                <h4 class="text-center">Click next to finish</h4>
+                                                <br>
+                                                <br>
+                                                <div class="form-footer">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <ul class="pager wizard no-margin">
+                                                                <li class="previous">
+                                                                    <a href="#" class="btn btn-lg btn-default"> Previous </a>
+                                                                </li>
+                                                                <li class="next disabled">
+                                                                    <a href="#" class="btn btn-lg txt-color-darken"> Next </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </div>
+
+
+</div>
+<script src="js/jquery-1.7.2.min.js"></script>
+	
+<script src="js/bootstrap.js"></script>
+<script src="js/base.js"></script>
+
+
+  </body>
+
+</html>

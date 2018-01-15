@@ -1,0 +1,62 @@
+<div data-ng-controller="viewUserCtrl">
+    <div layout="row" layout-align="start space-between" class="md-padding">
+        <div flex="60" class="md-whiteframe-1dp md-w" style="background-color: white;">
+            <div class="md-padding">
+                <div layout="row" layout-align="start center">
+                    <div>
+                        <ng-letter-avatar dynamic="true" data="{{userData.first_name}}{{ userData.last_name }}" shape="round" height="150px" width="150px" charCount="2" fontSize="80"></ng-letter-avatar>
+                    </div>
+                    <div style="margin-left: 10px">
+                        <p class="md-title" data-ng-bind-template="{{ userData.first_name | ucfirst}} {{ userData.last_name | ucfirst}}"></p>
+                        <p class="md-title">{{ userData.email }}</p>
+                    </div>
+                </div>
+                <md-list flex>
+                    <md-list-item>
+                        <md-icon class="material-icons" data-ng-bind="'phone'"></md-icon>
+                        <p class="md-subhead">{{ userData.contact_number }}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="material-icons"></md-icon>
+                        <p class="md-subhead">Date of Birth {{ userData.dob }}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="material-icons"></md-icon>
+                        <p class="md-subhead">Gender: {{ userData.gender }}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="material-icons"></md-icon>
+                        <p class="md-subhead">Country: {{ userData.country}}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="material-icons"></md-icon>
+                        <p class="md-subhead">State: {{ userData.state}}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="material-icons"></md-icon>
+                        <p class="md-subhead">User Type: {{ userData.user_type}}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="material-icons"></md-icon>
+                        <p class="md-subhead">User Role: {{ userData.user_type}}</p>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+        <div flex="20" class="md-whiteframe-14dp" style="background-color: white;margin-left: 10px;" layout-align="center">
+            <div class="md-padding">
+                <md-list>
+                    <md-list-item>
+                        <p class="md-subhead">Registered: </p><span am-time-ago="userData.created_at"></span>
+                    </md-list-item>
+                    <md-list-item>
+                        <p class="md-subhead">User Role: {{ userData.role }}</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-switch ng-disabled="true" ng-model="userData.verified" ng-true-value="'true'" ng-false-value="'false'">Verification {{ userData.verified }}</md-switch>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </div>
+</div>

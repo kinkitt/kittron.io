@@ -1,0 +1,22 @@
+<div>
+    <md-content class="">
+        <md-nav-bar md-no-ink-bar="'true'" nav-bar-aria-label="navigation links">
+
+            <md-nav-item md-nav-click="goto('page2')" name="page1" ng-repeat="t in templates">
+                Basic Info
+            </md-nav-item>
+
+            <md-nav-item md-nav-click="goto('page2')" name="page2">
+                Public Info
+            </md-nav-item>
+            <md-nav-item md-nav-click="goto('page3')" name="page3">
+                Bookings
+            </md-nav-item>
+        </md-nav-bar>
+        <div class="md-padding">
+            <div class="md-padding" style="height: 70px; margin-top: 10px; background-color: red;" ng-include="page">
+
+            </div>
+        </div>
+    </md-content>
+</div>

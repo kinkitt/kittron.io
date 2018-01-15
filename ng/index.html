@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="kittron" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="kittron" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="kittron" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="kittron" class="no-js"  ng-strict-di ng-controller="MainCtrl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title ng-bind-template="{{$title}}"></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">-->
+  <!--<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">-->
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/angular-fx.min.css">
+  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:900|Fira+Mono|Pavanam|Swanky+and+Moo+Moo" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+  <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+
+
+  <script src="js/angular.js"></script>
+  <script src="js/angular-ui-router.js"></script>
+
+  <script src="js/angular-animate.js"></script>
+  <script src="js/angular-sanitize.js"></script>
+  <script src="js/angular-messages.js"></script>
+  <script src="js/angular-aria.js"></script>
+  <script src="js/angular-ui-router-title.js"></script>
+  <script src="js/ocLazyLoad.js"></script>	
+  <script src="js/angular-imagefit.js"></script>	
+  <script src="js/angular-country-state.js"></script>	
+  <script src="js/dirPagination.js"></script>
+
+  <script src="node_modules/satellizer/dist/satellizer.js"></script>
+
+  <script src="node_modules/angular-material/angular-material.js"></script>
+  <script src="node_modules/typed.js/lib/typed.js"></script>
+
+
+  <!--app-->
+  <script src="app.module.js"></script>
+  <script src="app.config.js"></script>
+  <script src="mainCtrl.js"></script>
+
+  <!--home-page-->
+  <script src="ngf/home/home.module.js"></script>
+  <script src="ngf/home/home.component.js"></script>
+  
+  <script src="ngf/hotel/hotel.module.js"></script>
+  <script src="ngf/hotel/hotel.component.js"></script>
+  <script src="ngf/hotel/hotel_result_controller.js"></script>
+
+  <script src="ngf/event_center/event_center.module.js"></script>
+  <script src="ngf/event_center/event_center.component.js"></script>
+  <script src="ngf/event_center/event_center_result.controller.js"></script>
+
+
+  <script src="ngf/event_planner/event_planner.module.js"></script>
+  <script src="ngf/event_planner/event_planner.component.js"></script>
+  <script src="ngf/event_planner/event_planner_result_controller.js"></script>
+
+
+  <script src="ngf/vendor/vendor.module.js"></script>
+  <script src="ngf/vendor/vendor.component.js"></script>
+  <script src="ngf/vendor/vendor_result_controller.js"></script>
+
+  <!--account-->
+  <script src="ngf/account/account.module.js"></script>
+  <script src="ngf/account/account.config.js"></script>
+  <script src="ngf/account/account.component.js"></script>
+ 
+    <script>
+
+
+    </script>
+
+    <style>
+        body{
+            background: url(images/download_mdb_2) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            position:relative;
+            font-family: 'Pavanam', sans-serif;
+
+        }
+        /*font{*/
+            /*font-family: 'Fira Mono', monospace;*/
+            /*font-family: 'Swanky and Moo Moo', cursive;*/
+            /*font-family: 'Pavanam', sans-serif;*/
+
+        /*}*/
+        .nav{
+            background-color:rgba(41, 182, 246, 0);
+            
+        }
+        .nav-wrapper ul li a{
+        /*font-size:10px;*/
+        }
+        .menu{
+        	transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        
+        	background-color:white;
+        	 position: fixed;
+           top: 0;
+           bottom: 0;
+           right: 0;
+          left: 0;
+          color:whte;
+          height:100%;
+        	width:100%;
+        	display:none;
+        	
+        	z-index:999;
+        }
+        .hide-menu{
+        	display:none;
+        }
+        .banner{
+        		display:block;
+        		height:450px;
+            background-color: rgb(41, 182, 246);
+        }
+        .banner_text{
+        		height:350px;
+            width:1000px;
+            font-size:45px ;
+            color: #ffffff;
+            text-align:center;
+        }
+        .banner_text span{
+        	display:none;
+        }
+        img.bg {
+            /* Set rules to fill background */
+            min-height: 100%;
+            min-width: 1680px;
+            
+             -webkit-filter: blur(5px);
+  						-moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+
+            /* Set up proportionate scaling */
+            width: 100%;
+            height: auto;
+
+            /* Set up positioning */
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+
+        .kr_dt{
+            z-index:9;
+        }
+        .kr_dt .caption{
+        	font-size:10px ;
+        	font-family:'Cinzel';
+        }
+        .ker {
+            margin-top: 55px;
+        }
+        .ker input::placeholder{
+            color:white;
+        }
+        .material-icons.white600 { color: #ffffff; }
+        
+        .kr_test_bg{
+            background-color: rgb(51, 0, 153);
+        }
+
+        .b_txt{
+
+            color:black;
+            text-align:center;
+            font-size:1.5em;
+            font-family: 'Roboto', sans-serif;
+            
+        }
+        .underline{
+            border-bottom: 2px solid gray;
+            width:80%;
+            margin-left:10%;
+            margin-right:10%;
+            vertical-align:center;
+
+        }
+        
+        .kr_tst{
+        	  font-family: 'Swanky and Moo Moo', cursive;
+        }
+        .show_menu-add{
+        	display:block;
+        	opacity:0.5;
+        }
+        .show_menu-remove{
+        	display:block;
+        	opacity:0.5;
+        	
+        	
+        }
+        .show_menu{
+        	opacity:1;
+        	display:block;
+        	}
+        	
+        	.show_search{
+        	
+        	}
+        	
+        	
+.show_search.ng-hide-add {
+  opacity:0.9;
+  font-size:400px;
+  transition: all 0.5s ease-in-out;
+}
+
+.show_search.ng-hide-add.ng-hide-add-active {
+  opacity:0.2;
+  transition:all 0.5s ease-in-out;
+}
+
+.show_search.ng-hide-remove {
+  opacity:0.7;
+  transition: all 0.5s ease;
+}
+
+.show_search.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateY(0);
+}
+.kr-view{
+	display:block;
+}
+.kr-view.ng-enter,
+.kr-view.ng-leave{
+
+	  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	
+}
+
+.kr-view.ng-enter {
+  opacity:0.5;
+}
+.kr-view.ng-enter.ng-enter-active {
+  opacity:1;
+}
+.kr-view.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+
+    </style>
+</head>	
+<body>
+
+<div class="menu show_menu" ng-show="showMenu">
+<span class="md-padding" layout="row" layout-align="start end">
+	<span>
+		<a id="logo-container" ng-click="goto('home')" class="brand-logo left" style="margin-top:5px; ">
+        <img src="ngf/kittron_logo.png"/>
+    </a>
+	</span>
+	<span flex>
+	</span>
+	<span>
+		<md-button class="md-icon-button" ng-click="menuToggle()" aria-label="close">
+        <md-icon class="material-icons" ng-bind="'close'"></md-icon>
+     </md-button>
+	</span>
+</span>
+<span layout="row" layout-align="center center">
+	<md-button class="md-primary" ng-click="goto('login')">
+	<md-icon class="material-icons" ng-bind="'exit_to_app'"></md-icon>
+	Login
+	</md-button>
+	<md-button class="md-primary" ng-click="goto('register.basic')">
+	<md-icon class="material-icons" ng-bind="'create'"></md-icon>
+	Sign up
+	</md-button>
+	
+</span>
+
+<span layout="column">
+<md-divider></md-divider>
+<div>
+<md-content layout-align="center center">
+<md-list flex>
+	 <md-list-item class="md-2-line">
+	  <img ng-src="" class="md-avatar" alt="us" /> 
+	  <div class="md-list-item-text">
+	   <h3>who we</h3> 
+	   <p>Secondary text</p> </div> 
+	   </md-list-item> 
+	     <md-list-item class="secondary-button-padding">
+    		<p>Clicking the button to the right will fire the secondary action</p>
+   		 <md-button class="md-secondary">More Info</md-button>
+  		</md-list-item>
+</md-list>
+</md-content>
+</div>
+</span>
+			
+</div>
+<nav class="light-blue lighten-1" role="navigation" layout="row" layout-align=" start space-between">
+    <a id="logo-container" ui-sref="home" class="brand-logo left" style="margin-top:5px; ">
+        <img src="ngf/kittron_logo.png" class="hide-on-med-and-down" hide-sm/>
+        <img src="k_logo.png" class="hide-on-sm-and-down" hide-md hide-gt-md width="25px" height="25px"/>
+    </a>
+    <span flex>
+
+    </span>
+    <div class="nav-wrapper container" ng-show="!showSearch">
+        <ul class="left hide-on-med-and-down" hide-sm>
+            <li><a ui-sref="how_kittron_works">How Kittron Works</a></li>
+            <li><a ui-sref="tickets">Tickets</a></li>
+            <li><md-menu><a ng-click="$mdMenu.open()">Account <md-icon class="material-icons white600">account_circle</md-icon></a>
+                <md-menu-content width="3">
+                    <md-menu-item>
+                        <md-button ui-sref="login">
+                            <md-icon class="material-icons" ng-bind="'exit_to_app'"></md-icon>
+                            Log in
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ui-sref="register.basic">
+                            <md-icon class="material-icons" ng-bind="'create'"></md-icon>
+                            Sign Up now
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+
+            </li>
+        </ul>
+        <span flex></span>
+   
+      </div>
+    <div class="md-toolbar-tools nav-wrappr contaner show_search" ng-show="showSearch">
+    <span flex>
+
+     </span>
+        <md-button class="md-icon-button" aria-label="Search" ng-click="showSearch = !showSearch">
+            <md-icon class="material-icons white600" ng-bind="'close'"></md-icon>
+        </md-button>
+
+        <md-input-container flex="80" class="ker">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="search here">
+        </md-input-container>
+
+        <md-button class="md-icon-button " aria-label="Search">
+            <md-icon class="material-icons white600" ng-bind="'search'"></md-icon>
+        </md-button>
+
+
+    </div>
+    <span flex>
+
+    </span>
+    <div>
+	    <span  ng-hide="showSearch" style="">
+				 <md-button class="md-icon-button" aria-label="Search" ng-click="showSearch = !showSearch">
+		        <md-icon class="material-icons white600">search</md-icon>
+		      </md-button>
+	     </span>    
+		      <md-button class="md-icon-button" hide-md aria-label="Menu" ng-click="menuToggle()">
+		        <md-icon class="material-icons white600"  ng-bind="'menu'"></md-icon>
+		      </md-button>
+    </div>
+</nav>
+
+
+<div>
+
+
+
+
+  
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <section class="kr-view " flex layout="column" ui-view></section>
+  
+  
+  
+</body>
+</html>

@@ -1,0 +1,114 @@
+<div ng-controller="ChartCtrl">
+    <div layout="column" flex="100" class="md-padding">
+        <md-divider></md-divider>
+        <div layout="row" layout-align=" space-around center">
+            <div>
+                <h1>1,234,345.1</h1>
+                <p>Total Revenue</p>
+            </div>
+            <div>
+                <h1>3423</h1>
+                <p>Total Bookings</p>
+            </div>
+            <div>
+                <h1>3,423</h1>
+                <p>Guests</p>
+            </div>
+        </div>
+        <md-divider></md-divider>
+    </div>
+    <md-card>
+        <md-table-container>
+            <md-toolbar class="md-table-toolbar">
+                <div class="md-toolbar-tools">
+                    <span>Bookings</span>
+                    <span flex></span>
+                    <span style="margin-top: 40px">
+                    <md-input-container>
+                        <input ng-model="search_q" placeholder="Search">
+                    </md-input-container>
+                </span>
+
+                </div>
+            </md-toolbar>
+            <table data-md-table data-md-row-select="options.rowSelection"  data-ng-model="selected" md-progress="promise">
+                <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                <tr md-row>
+                    <th md-column ><span></span></th>
+                    <th md-column md:order:by="name" data-md-order-by="email"><span></span></th>
+                    <th md-column ><span></span></th>
+                    <th md-column ></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row data-ng-repeat="booking in bookings.data | filter: search_q | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                    <td md-cell><ng-letter-avatar data="{{booking.name}}" shape="round" height="40px" width="40px"></ng-letter-avatar></td>
+                    <td md-cell>
+                        <div>
+                            <h3>Customer Name {{booking.name}} </h3>
+                            <h4>Booking Id {{booking.id}}</h4>
+                            <p>Checked-in {{booking.name}}</p>
+                        </div>
+                    </td>
+                    <td md-cell>
+                        <div>
+                            <p>Rooms</p>
+                            <p>Checked-out</p>
+                        </div>
+                    </td>
+                    <td md-cell>
+                        <div>
+                            <p>Status : Completed</p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{bookings.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+    </md-card>
+
+    <!--<div layout="column">-->
+    <!--<md-toolbar layout="row" class="md-hue-3">-->
+    <!--<div class="md-toolbar-tools">-->
+    <!--<span>Bookings</span>-->
+    <!--</div>-->
+    <!--</md-toolbar>-->
+    <!--<md-list flex>-->
+    <!--<md-list-item class="md-3-line" ng-repeat="item in [1,2,3,4,5,6,7,8,9,0]" ng-click="null" class="noright">-->
+    <!--&lt;!&ndash;<img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{ite}}" />&ndash;&gt;-->
+    <!--<span class="md-avatar">-->
+    <!--<ng-letter-avatar data="{{item}}" shape="round" height="40px" width="40px"></ng-letter-avatar>-->
+    <!--</span>-->
+    <!--<div class="md-list-item-text" layout="column">-->
+    <!--<h3>Customer Name {{ item }} </h3>-->
+    <!--<h4>Booking Id{{ item }}</h4>-->
+    <!--<p>Checked-in</p>-->
+    <!--</div>-->
+    <!--<div class="md-list-item-text" layout="column">-->
+    <!--<p>Rooms</p>-->
+    <!--<p>Checked-out</p>-->
+    <!--</div>-->
+    <!--<div class="md-list-item-text" layout="column">-->
+    <!--<p>Status : Completed</p>-->
+    <!--</div>-->
+    <!--</md-list-item>-->
+    <!--</md-list>-->
+    <!--</div>-->
+
+    <!--<div data-layout="row" data-layout-align="start space-between" class="md-padding" >-->
+    <!--<div data-flex="30" class="md-whiteframe-3dp md-padding">-->
+    <!--<data-md-list>-->
+    <!--<data-md-list-item>-->
+    <!--<p>Paymant method : </p>-->
+    <!--</data-md-list-item>-->
+    <!--<data-md-list-item>-->
+    <!--<p>Preferred currency : </p>-->
+    <!--</data-md-list-item>-->
+    <!--</data-md-list>-->
+    <!--</div>-->
+    <!--<div data-flex="70" class="md-whiteframe-3dp" style="margin-left: 5px;">-->
+    <!--<md-widget-engine configuration='data.configuration' callback="data.callback"></md-widget-engine>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>

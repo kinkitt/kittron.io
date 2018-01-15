@@ -1,0 +1,17 @@
+<p><strong>Step 3</strong> - Website Setup</p>
+<md-input-container md-no-float class="md-block">
+    <input ng-model="user.address" type="text" placeholder="Address" >
+    <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+</md-input-container>
+<div layout-gt-xs="row">
+    <md-input-container class="md-block" flex-gt-xs>
+        <label>Custom email</label>
+        <input type="text" ng-model="userData.custom_email" ng-init="userData.custom_email = customEmail(userData)" disabled>
+        <i>This is your customized email address for mailing and marketing purposes</i>
+    </md-input-container>
+</div>
+<md-input-container class="md-block">
+    <label>Business description</label>
+    <textarea placeholder="Enter your business description" ng-model="userData.site_desc" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+</md-input-container>
+<md-button class="md-primary md-raised md-hue-2 pull-right clearfix"ng-disabled="registerForm.$invalid || registerForm.$dirty" ui-sref="register.confirm">Next</md-button>

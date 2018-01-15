@@ -1,0 +1,76 @@
+[
+    {
+        "Id" : "floor_spring_series",
+        "name" : "Floor Spring Series",
+        "imgUrl" : "images/floor_spring_series.jpg"
+    },
+    {
+        "Id" : "auto_sliding_door_series",
+        "name" : "Automatic Door Engine",
+        "imgUrl" : "images/auto_sliding_door_series.jpg"
+    },
+    {
+        "Id" : "hinge_door_series",
+        "name" : "Hinge Door Series",
+        "imgUrl" : "images/hinge_door_series.jpg"
+    },
+    {
+        "Id" : "handles_series",
+        "name" : "Handle Series",
+        "imgUrl" : "images/handles_series.jpg"
+    },
+    {
+        "Id" : "waterproof_series",
+        "name" : "Waterproof Series",
+        "imgUrl" : "images/waterproof_series.jpg"
+    },
+    {
+        "Id" : "hang_wheel_series",
+        "name" : "Hang Wheel Series",
+        "imgUrl" : "images/hang_wheel_series.jpg"
+    },	{
+    "Id" : "pivot_door_series",
+    "name" : "Pivot Door Series",
+    "imgUrl" : "images/pivot_door_series.jpg"
+},
+    {
+        "Id" : "glass_spider_series",
+        "name" : "Glass Spider Series",
+        "imgUrl" : "images/glass_spider_series.jpg"
+    },
+    {
+        "Id" : "patch_fitting_series",
+        "name" : "Patch Fitting Series",
+        "imgUrl" : "images/patch_fitting_series.jpg"
+    },
+    {
+        "Id" : "shower_hinge_series",
+        "name" : "Shower Hinge Series",
+        "imgUrl" : "images/shower_hinge_series.jpg"
+    },
+    {
+        "Id" : "lock_series",
+        "name" : "Lock Series",
+        "imgUrl" : "images/lock_series.jpg"
+    },
+    {
+        "Id" : "knighthead_fitting",
+        "name" : "Knighthead Series",
+        "imgUrl" : "images/knighthead_fitting.jpg"
+    },
+    {
+        "Id" : "sliding_door_series",
+        "name" : "Sliding Series",
+        "imgUrl" : "images/sliding_door_series.jpg"
+    },
+    {
+        "Id" : "suction_series",
+        "name" : "Suction Series",
+        "imgUrl" : "images/suction_series.jpg"
+    },
+    {
+        "Id" : "security_equipment",
+        "name" : "Security Equipment",
+        "imgUrl" : "images/security_equipment.jpg"
+    }
+    ]

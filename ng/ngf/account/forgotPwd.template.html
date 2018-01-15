@@ -1,0 +1,35 @@
+<!--<div class="container">-->
+    <!--<div>-->
+        <!--<div id="forgot" class="col-sm-offset-3 col-sm-5">-->
+            <!--<form class="form-signin" novalidate name="forgotForm">-->
+                <!--<legend>Enter your valid email for recovery</legend>-->
+                <!--<input type="email" name="RecoveryEmail" ng-model="recoveryEmail" placeholder="Email address" class="form-control" ng-required="true">-->
+                <!--<div style="margin-top: 10px;">-->
+                    <!--<button class="col-sm-12 btn text-muted text-center btn-success"ng-disabled="forgotForm.$invalid" type="submit">Recover Password</button>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br/>-->
+<!--</div>-->
+<section  flex layout-align="center center" class="md-padding" layout-xs="column" layout="row" >
+    <md-card  class="md-whiteframe-4dp" flex flex-gt-sm="50" flex-gt-md="33">
+        <md-progress-linear ng-show="processing" md-mode="intermediate" class="md-warn"></md-progress-linear>
+        <md-toolbar>
+            <div layout="column" layout-padding layout-align="center center">
+                <div class="md-headline md-padding">Recovery email</div>
+            </div>
+        </md-toolbar>
+        <md-card-content >
+            <form novalidate name="forgotForm">
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input type="email" name="RecoveryEmail" ng-model="recoveryEmail" placeholder="Email address" ng-required="true">
+                </md-input-container>
+            </form>
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-disabled="forgotForm.$invalid" type="submit">Recover</md-button>
+            </div>
+        </md-card-content>
+    </md-card>
+</section>

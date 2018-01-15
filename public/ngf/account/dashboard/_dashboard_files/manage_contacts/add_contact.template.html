@@ -1,0 +1,127 @@
+
+<md-dialog aria-label="Add Contact">
+    <form novalidate name="contactForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools" ng-show="contactForm.$valid">
+                <md-button ng-click="save()">
+                    Save
+                </md-button>
+                <span flex></span>
+
+                <md-button ng-click="cancel()" style="margin-right:20px;" >
+                    Cancel
+                </md-button>
+            </div>
+            <div class="md-toolbar-tools" ng-show="contactForm.$invalid">
+                <h2>Add Contact</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="material-icons" ng-bind="'close'" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:350px; max-width:700px;max-height:900px; ">
+
+            <div class="inset" style="" flex layout="column" layout-align="space-between center">
+                <div>
+                    <div layout="column" layout-align="center center" >
+                        <img src="images/profile.jpg" class="md-avatar huge contact-avatar">
+                    </div>
+                </div>
+
+                <div>
+                    <md-button class="md-icon-button">
+                        <md-icon class="material-icons" ng-bind="'star_border'" aria-label="Favorite"></md-icon>
+                    </md-button>
+
+                    <md-menu>
+                        <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+                            <md-icon class="material-icons" ng-bind="'people'" aria-label="Add contacts"></md-icon>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.redial($event)">
+                                    Clients
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.checkVoicemail()">
+                                    Friends
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.toggleNotifications()">
+                                    vendors
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.toggleNotifications()">
+                                    Workers
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </div>
+
+            <div class="md-padding">
+                <md-input-container class="md-icon-float md-block">
+                    <label>Name</label>
+                    <md-icon class="material-icons" ng-bind="'person'" class="name"></md-icon>
+                    <input ng-model="data.name" type="text" ng-required="true">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Last name</label>
+                    <md-icon></md-icon>
+                    <input ng-model="data.lastname" type="text">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <md-icon class="material-icons" ng-bind="'phone'"></md-icon>
+                    <input ng-model="data.phone_number" type="text" placeholder="Phone Number"  ng-required="true">
+                </md-input-container>
+                <div layout="column" layout-align="center space-between" ng-show="!showMore">
+                    <md-button class="md-button  md-raised md-primary" ng-click="showMore = !showMore">show more</md-button>
+                </div>
+                <div ng-if="showMore">
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Nickname</label>
+                        <md-icon></md-icon>
+                        <input ng-model="data.nickname" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-icon class="material-icons" ng-bind="'email'"></md-icon>
+                        <input ng-model="data.email" type="email" placeholder="Email (required)">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <md-icon class="material-icons" ng-bind="'business'"></md-icon>
+                        <input ng-model="data.company" type="text" placeholder="Company">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <md-icon class="material-icons" ng-bind="'worker'"></md-icon>
+                        <input ng-model="data.title" type="text" placeholder="Job title">
+                    </md-input-container>
+
+                    <md-input-container size="9">
+                        <label>Date of Birth</label>
+                        <md-datepicker ng-model="data.dob" ></md-datepicker>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <md-icon class="material-icons" ng-bind="'home'"></md-icon>
+                        <input ng-model="data.address" type="text" placeholder="Address">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-icon class="material-icons" ng-bind="'mode_comment'"></md-icon>
+                        <input ng-model="data.note" type="text" placeholder="Note">
+                    </md-input-container>
+
+                </div>
+
+                <div layout="column" layout-align="center space-between" ng-show="showMore">
+                    <md-button class="md-button md-raised md-primary" ng-click="showMore = !showMore">show less</md-button>
+                </div>
+            </div>
+    </form>
+</md-dialog>

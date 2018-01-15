@@ -1,0 +1,6 @@
+<p ng-bind-template="{{weatherData.sys.sunrise | date:'fullDate'}}"></p>
+<p ng-bind="weatherData.name"></p>
+<p ng-bind="weatherData.base"></p>
+<p ng-bind-template="{{weatherData.main.temp}}&#176;C&nbsp;&#126;&nbsp; {{ weatherData.weather[0].main}}"></p>
+<p ng-bind-template="{{weatherData.weather[0].description}}"></p>
+

@@ -1,0 +1,124 @@
+
+<div flex="100" layout="row" layout-align="center center" >
+	<md-content flex="100" style="background-image: url(images/hotel.png); min-height: 300px; top:-13px;">
+		<md-content flex="95" layout="row" layout-align="center center" style="margin-left: 2.5%; margin-top: 100px" class="md-whiteframe-14dp">
+			<form>
+				<div layout-gt-xs="row">
+                <md-input-container class="md-block">
+                  <label>Location</label>
+                  <md-icon class="material-icons">place</md-icon>
+                  <input ng-model="user.name" type="text">
+                </md-input-container>
+				<md-input-container class="md-block">
+					<md-datepicker ng-model="ctrl.checkInDate" md-placeholder="Check-in date" md-open-on-focus></md-datepicker>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<md-datepicker ng-model="ctrl.checkOutDate" md-placeholder="Check-out date" md-open-on-focus></md-datepicker>
+				</md-input-container>
+
+			</div>
+			
+			<div layout="row" layout-align=" center">
+				<md-button class="md-raised md-accent" ng-click="find_event_planner()">find a Planner</md-button>
+			</div>
+			</form>
+		</md-content>
+	</md-content>
+</div>
+
+<div>
+	<md-content flex="100">
+		<md-card>
+			<md-card-title>
+			<md-card-title-text>
+				<span class="md-subhead">Find great deals for your next trip</span>
+				<p>From budget hotels to luxurious apartments, book for less!</p>
+			</md-card-title-text>
+			</md-card-title>
+		</md-card>
+		<md-card>
+			<md-card-title>
+			<md-card-title-text>
+				<span class="md-subhead">Book now pay at check-in</span>
+				<p>With FREE cancellation on most rooms</p>
+			</md-card-title-text>
+			</md-card-title>
+		</md-card>
+		<md-card>
+			<md-card-title>
+			<md-card-title-text>
+				<span class="md-subhead">Price matching</span>
+				<p>Find something cheaper? We'll refund the difference!</p>
+			</md-card-title-text>
+			</md-card-title>
+		</md-card>
+			</md-content>
+</div>
+
+<md-card layout="column" flex="" layout-align="center center">
+			<div>Subscribe for the best discount and offers</div>
+			<div>
+			<form>
+					<md-input-container flex="100">
+            <label>Email</label>
+             <md-icon class="material-icons">mail</md-icon>
+           <input ng-model="user.name" type="text">
+        </md-input-container>
+				
+					 <md-button class="md-raised md-primary">Subscribe</md-button>
+				
+				</form>
+			</div>
+			
+       
+		</md-card>
+		
+		 <div layout="column">
+     		 <span flex-md='80' class='kr_dt b_txt'>
+          	<p class='underline'>TESTIMONIALS</p>
+          </span>
+          
+          <div class="kr_test_bg" layout="row" layout-sm='column' layout-align="start space-between" flex>
+          		<div flex-gt-md="50" flex-sm='100' class="md-padding" flex-md="50">
+          			<md-content style='border-radius:10px;'>
+          		<p class='kr_tst' style="padding-left:10px; padding-right:10px;">
+          			ehhhsjjsjj
+          		</p>
+          			 <md-toolbar>
+      							<h5 style='padding-left:10px;'>-Barry Ogbonna</h5>
+      							<i style='padding-left:10px;'>-Barry Ogbonna</i>
+							    </md-toolbar>
+							    
+     						<md-fab-speed-dial md-direction="left" class="md-scale md-fab-top-right">       
+						    
+						      </md-fab-trigger>
+						      <span style='border-radius:100%;  padding:10px ; background-color:white;'>
+						      <img src='images/png/003-holidays.png' width='50px' />
+						    
+						      </span>
+						      </md-fab-speed-dial>			          
+						</md-content>
+          		</div>
+
+          		<div flex-md="50" flex-sm='100' class="md-padding" flex-gt-md="50">
+          			<md-content style='border-radius:10px;'>
+			          		<p class='kr_tst' style="padding-left:10px; padding-right:10px;">
+			          			ehhhsjjsjj
+			          		</p>
+	          			 <md-toolbar>
+      							<h5>-Barry Ogbonna</h5>
+      							<i>-Barry Ogbonna</i>
+							    </md-toolbar>
+
+     						<md-fab-speed-dial md-direction="left" class="md-scale md-fab-top-right">
+						      <md-fab-trigger>
+						        <md-button aria-label="menu" class="md-fab md-primary">
+						          <md-tooltip md-direction="top" md-visible="tooltipVisible">Menu</md-tooltip>
+						          <md-icon class="material-icons" aria-label="menu">search</md-icon>
+						        </md-button>
+						      </md-fab-trigger>
+						     </md-fab-speed-dial>
+						</md-content>
+          		</div>
+          </div>
+     </div>
