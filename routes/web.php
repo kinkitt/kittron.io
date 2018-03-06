@@ -37,12 +37,11 @@ Route::get('/hotels', 'Hotel\HotelController@index');
 Route::post('/check', 'Backend\RegisterController@echeck');
 Route::get('/account/verify/{code}', 'Backend\RegisterController@verify');
 Route::get('/faker', 'Backend\RegisterController@create')->middleware('auth');
-Route::get('/hotels/register', 'Hotel\HotelController@saveHotel');
 
 //Route to get Account Type from DB whether Vendor, Event Planner
 Route::get('/getAccountType', 'RootController@getAcctTypeRole');
 //Route to get all users
 Route::get('dashboard/users', 'RootController@getAllUsers');
 
-Route::post('/hotels/register', 'Hotel\HotelController@saveHotel');
+Route::post('/hotels/register', 'Hotel\HotelController@createHotelRecord');
 
